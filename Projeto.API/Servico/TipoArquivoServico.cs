@@ -19,38 +19,38 @@ public class TipoArquivoServico : ITipoArquivoServico
 
     public async Task<IEnumerable<TipoArquivoDTO>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
-        var tipoArquivoEntity = await _tipoArquivoRespositorio.PegarTodos(pagina, tamanho, pesquisa);
-        return _mapper.Map<IEnumerable<TipoArquivoDTO>>(tipoArquivoEntity);
+        var tipoArquivos = await _tipoArquivoRespositorio.PegarTodos(pagina, tamanho, pesquisa);
+        return _mapper.Map<IEnumerable<TipoArquivoDTO>>(tipoArquivos);
     }
     public async Task<IEnumerable<TipoArquivoDTO>> PegarTodosAtivos(int pagina, int tamanho, string pesquisa)
     {
-        var tipoArquivoEntityAtivo = await _tipoArquivoRespositorio.PegarTodosAtivos(pagina, tamanho, pesquisa);
-        return _mapper.Map<IEnumerable<TipoArquivoDTO>>(tipoArquivoEntityAtivo);
+        var tipoArquivosAtivo = await _tipoArquivoRespositorio.PegarTodosAtivos(pagina, tamanho, pesquisa);
+        return _mapper.Map<IEnumerable<TipoArquivoDTO>>(tipoArquivosAtivo);
     }
     public async Task<TipoArquivoDTO> PegarPorId(int id)
     {
-        var tipoArquivoEntity = await _tipoArquivoRespositorio.PegarPorId(id);
-        return _mapper.Map<TipoArquivoDTO>(tipoArquivoEntity);
+        var tipoArquivo = await _tipoArquivoRespositorio.PegarPorId(id);
+        return _mapper.Map<TipoArquivoDTO>(tipoArquivo);
 
     }
-    public async Task Criar(TipoArquivoDTO tipoArquivo)
+    public async Task Criar(TipoArquivoDTO tipoArquivoDTO)
     {
-        var tipoArquivoEntiry = _mapper.Map<TipoArquivo>(tipoArquivo);
-        await _tipoArquivoRespositorio.Criar(tipoArquivoEntiry);
-        tipoArquivo.Id = tipoArquivoEntiry.Id;
+        var tipoArquivo = _mapper.Map<TipoArquivo>(tipoArquivoDTO);
+        await _tipoArquivoRespositorio.Criar(tipoArquivo);
+        tipoArquivoDTO.Id = tipoArquivo.Id;
 
     }
-    public async Task Atualizar(TipoArquivoDTO tipoArquivo)
+    public async Task Atualizar(TipoArquivoDTO tipoArquivoDTO)
     {
-        var tipoArquivoEntiry = _mapper.Map<TipoArquivo>(tipoArquivo);
-        await _tipoArquivoRespositorio.Atualizar(tipoArquivoEntiry);
+        var tipoArquivo = _mapper.Map<TipoArquivo>(tipoArquivoDTO);
+        await _tipoArquivoRespositorio.Atualizar(tipoArquivo);
     }
     public async Task Deletar(int id)
     {
-        var tipoArquivoEntiry = PegarPorId(id).Result;
-        if (tipoArquivoEntiry is not null)
+        var tipoArquivoDTO = PegarPorId(id).Result;
+        if (tipoArquivoDTO is not null)
         {
-            await _tipoArquivoRespositorio.Deletar(tipoArquivoEntiry.Id);
+            await _tipoArquivoRespositorio.Deletar(tipoArquivoDTO.Id);
         }
     }
     public async Task<int> TotalDados(string pesquisa)

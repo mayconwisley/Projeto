@@ -16,13 +16,13 @@ public class ControleCaixaRepositorio : IControleCaixaRepositorio
 
     public async Task<IEnumerable<ControleCaixa>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
-        var listControleCaixa = await _appDbContext.ControleCaixas
+        var controleCaixas = await _appDbContext.ControleCaixas
             .OrderBy(o => o.TipoArquivo.Descricao)
             .Skip((pagina - 1) * tamanho)
             .Take(tamanho)
             .ToListAsync();
 
-        return listControleCaixa;
+        return controleCaixas;
     }
 
     public async Task<ControleCaixa> PegarPorId(int id)

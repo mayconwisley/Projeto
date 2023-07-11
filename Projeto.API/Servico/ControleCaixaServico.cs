@@ -17,36 +17,36 @@ public class ControleCaixaServico : IControleCaixaServico
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<ControleCaixaDTO>> PegarTodos(int pagina, int tamanho, string pesquisa)
+    public async Task<IEnumerable<ControleCaixaOutputDTO>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
-        var controleCaixaEntity = await _controleCaixaRepositorio.PegarTodos(pagina, tamanho, pesquisa);
-        return _mapper.Map<IEnumerable<ControleCaixaDTO>>(controleCaixaEntity);
+        var controleCaixas = await _controleCaixaRepositorio.PegarTodos(pagina, tamanho, pesquisa);
+        return _mapper.Map<IEnumerable<ControleCaixaOutputDTO>>(controleCaixas);
     }
-    public async Task<ControleCaixaDTO> PegarPorId(int id)
+    public async Task<ControleCaixaOutputDTO> PegarPorId(int id)
     {
-        var controleCaixaEntity = await _controleCaixaRepositorio.PegarPorId(id);
-        return _mapper.Map<ControleCaixaDTO>(controleCaixaEntity);
+        var controleCaixa = await _controleCaixaRepositorio.PegarPorId(id);
+        return _mapper.Map<ControleCaixaOutputDTO>(controleCaixa);
 
     }
-    public async Task Criar(ControleCaixaDTO controleCaixa)
+    public async Task Criar(ControleCaixaInputDTO controleCaixaDTO)
     {
 
-        var controleCaixaEntiry = _mapper.Map<ControleCaixa>(controleCaixa);
-        await _controleCaixaRepositorio.Criar(controleCaixaEntiry);
-        controleCaixa.Id = controleCaixaEntiry.Id;
+        var controleCaixa = _mapper.Map<ControleCaixa>(controleCaixaDTO);
+        await _controleCaixaRepositorio.Criar(controleCaixa);
+        controleCaixaDTO.Id = controleCaixa.Id;
 
     }
-    public async Task Atualizar(ControleCaixaDTO controleCaixa)
+    public async Task Atualizar(ControleCaixaInputDTO controleCaixaDTO)
     {
-        var controleCaixaEntiry = _mapper.Map<ControleCaixa>(controleCaixa);
-        await _controleCaixaRepositorio.Atualizar(controleCaixaEntiry);
+        var controleCaixa = _mapper.Map<ControleCaixa>(controleCaixaDTO);
+        await _controleCaixaRepositorio.Atualizar(controleCaixa);
     }
     public async Task Deletar(int id)
     {
-        var controleCaixaEntiry = PegarPorId(id).Result;
-        if (controleCaixaEntiry is not null)
+        var controleCaixaDTO = PegarPorId(id).Result;
+        if (controleCaixaDTO is not null)
         {
-            await _controleCaixaRepositorio.Deletar(controleCaixaEntiry.Id);
+            await _controleCaixaRepositorio.Deletar(controleCaixaDTO.Id);
         }
     }
     public async Task<int> TotalDados(string pesquisa)

@@ -10,7 +10,7 @@ namespace Projeto.API.Servico;
 
 public class TokenServico : ITokenServico
 {
-    public Task<string> GerarToken(UsuarioOutputDTO usuario)
+    public Task<string> GerarToken(UsuarioOutputDTO usuarioDTO)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(Chave.Secreto);
@@ -18,8 +18,8 @@ public class TokenServico : ITokenServico
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Name,  usuario.Login),
-                new Claim(ClaimTypes.Role, usuario.Autorizacao.ToString())
+                new Claim(ClaimTypes.Name,  usuarioDTO.Login),
+                new Claim(ClaimTypes.Role, usuarioDTO.Autorizacao.ToString())
             }),
             Expires = DateTime.UtcNow.AddHours(8),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

@@ -54,8 +54,6 @@ builder.Services.AddSwaggerGen(c =>
         new List<string>()
         }
     });
-
-
 });
 
 var key = Encoding.ASCII.GetBytes(Chave.Secreto);
@@ -63,7 +61,6 @@ builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
 })
     .AddJwtBearer(x =>
     {
@@ -88,6 +85,10 @@ builder.Services.AddScoped<IUsuarioServico, UsuarioServico>();
 builder.Services.AddScoped<ITokenServico, TokenServico>();
 builder.Services.AddScoped<IControleCaixaRepositorio, ControleCaixaRepositorio>();
 builder.Services.AddScoped<IControleCaixaServico, ControleCaixaServico>();
+builder.Services.AddScoped<IItemArquivoRepositorio, ItemArquivoRepositorio>();
+builder.Services.AddScoped<IItemArquivoServico, ItemArquivoServico>();
+builder.Services.AddScoped<IProcessoRepositorio, ProcessoRepositorio>();
+builder.Services.AddScoped<IProcessoServico, ProcessoServico>();
 
 builder.Services.AddDbContext<AppDbContext>(cd => cd.UseSqlServer(strDataBase));
 

@@ -18,7 +18,7 @@ public class ControleCaixaController : ControllerBase
 
     [HttpGet]
     [Authorize(Roles = "Administrador, Operador, Consultor")]
-    public async Task<ActionResult<ControleCaixaDTO>> PegarTodos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
+    public async Task<ActionResult<ControleCaixaOutputDTO>> PegarTodos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
     {
         var controleCaixaDTO = await _controleCaixaServico.PegarTodos(pagina, tamanho, pesquisa);
         decimal totalDados = await _controleCaixaServico.TotalDados(pesquisa);
@@ -39,7 +39,7 @@ public class ControleCaixaController : ControllerBase
     }
     [HttpGet("{id:int}", Name = "PegarControleCaixa")]
     [Authorize(Roles = "Administrador, Operador, Consultor")]
-    public async Task<ActionResult<ControleCaixaDTO>> PegarPorId(int id)
+    public async Task<ActionResult<ControleCaixaOutputDTO>> PegarPorId(int id)
     {
         var controleCaixaDTO = await _controleCaixaServico.PegarPorId(id);
         if (controleCaixaDTO is not null)
@@ -50,7 +50,7 @@ public class ControleCaixaController : ControllerBase
     }
     [HttpPost]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<ControleCaixaDTO>> Post([FromBody] ControleCaixaDTO controleCaixa)
+    public async Task<ActionResult<ControleCaixaInputDTO>> Post([FromBody] ControleCaixaInputDTO controleCaixa)
     {
         if (controleCaixa is not null)
         {
@@ -61,7 +61,7 @@ public class ControleCaixaController : ControllerBase
     }
     [HttpPut("{id:int}")]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<ControleCaixaDTO>> Put(int id, [FromBody] ControleCaixaDTO controleCaixa)
+    public async Task<ActionResult<ControleCaixaInputDTO>> Put(int id, [FromBody] ControleCaixaInputDTO controleCaixa)
     {
         if (id != controleCaixa.Id)
         {
@@ -77,7 +77,7 @@ public class ControleCaixaController : ControllerBase
     }
     [HttpDelete("{id:int}")]
     [Authorize(Roles = "Administrador")]
-    public async Task<ActionResult<ControleCaixaDTO>> Delete(int id)
+    public async Task<ActionResult<ControleCaixaOutputDTO>> Delete(int id)
     {
         var controleCaixa = await _controleCaixaServico.PegarPorId(id);
         if (controleCaixa is not null)

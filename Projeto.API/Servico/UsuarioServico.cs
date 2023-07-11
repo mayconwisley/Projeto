@@ -20,64 +20,63 @@ public class UsuarioServico : IUsuarioServico
 
     public async Task<IEnumerable<UsuarioOutputDTO>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
-        var usuarioEntity = await _usuarioRepositorio.PegarTodos(pagina, tamanho, pesquisa);
-        return _mapper.Map<IEnumerable<UsuarioOutputDTO>>(usuarioEntity);
+        var usuarios = await _usuarioRepositorio.PegarTodos(pagina, tamanho, pesquisa);
+        return _mapper.Map<IEnumerable<UsuarioOutputDTO>>(usuarios);
     }
     public async Task<IEnumerable<UsuarioOutputDTO>> PegarTodosAtivos(int pagina, int tamanho, string pesquisa)
     {
-        var usuarioEntityAtivo = await _usuarioRepositorio.PegarTodosAtivos(pagina, tamanho, pesquisa);
-        return _mapper.Map<IEnumerable<UsuarioOutputDTO>>(usuarioEntityAtivo);
+        var usuariosAtivo = await _usuarioRepositorio.PegarTodosAtivos(pagina, tamanho, pesquisa);
+        return _mapper.Map<IEnumerable<UsuarioOutputDTO>>(usuariosAtivo);
     }
     public async Task<UsuarioOutputDTO> PegarPorId(int id)
     {
-        var usuarioEntity = await _usuarioRepositorio.PegarPorId(id);
-        return _mapper.Map<UsuarioOutputDTO>(usuarioEntity);
+        var usuario = await _usuarioRepositorio.PegarPorId(id);
+        return _mapper.Map<UsuarioOutputDTO>(usuario);
 
     }
     public async Task<UsuarioOutputDTO> PegarPorLogin(string login)
     {
-        var usuarioEntity = await _usuarioRepositorio.PegarPorLogin(login);
-        return _mapper.Map<UsuarioOutputDTO>(usuarioEntity);
+        var usuario = await _usuarioRepositorio.PegarPorLogin(login);
+        return _mapper.Map<UsuarioOutputDTO>(usuario);
     }
-    public async Task Criar(UsuarioInputDTO usuario)
+    public async Task Criar(UsuarioInputDTO usuarioDTO)
     {
-        UsuarioInputDTO usuarioDTO = new()
+        UsuarioInputDTO usuarioDTOMap = new()
         {
-            Id = usuario.Id,
-            Login = usuario.Login,
-            Nome = usuario.Nome,
-            Senha = SenhaHash.Gerar(usuario.Senha),
-            Autorizacao = usuario.Autorizacao,
-            Ativo = usuario.Ativo
+            Id = usuarioDTO.Id,
+            Login = usuarioDTO.Login,
+            Nome = usuarioDTO.Nome,
+            Senha = SenhaHash.Gerar(usuarioDTO.Senha),
+            Autorizacao = usuarioDTO.Autorizacao,
+            Ativo = usuarioDTO.Ativo
         };
 
-        var usuarioEntity = _mapper.Map<Usuario>(usuarioDTO);
-        await _usuarioRepositorio.Criar(usuarioEntity);
-        usuarioDTO.Id = usuarioEntity.Id;
+        var usuario = _mapper.Map<Usuario>(usuarioDTOMap);
+        await _usuarioRepositorio.Criar(usuario);
+        usuarioDTO.Id = usuario.Id;
 
     }
-    public async Task Atualizar(UsuarioInputDTO usuario)
+    public async Task Atualizar(UsuarioInputDTO usuarioDTO)
     {
-        UsuarioInputDTO usuarioDTO = new()
+        UsuarioInputDTO usuarioDTOMap = new()
         {
-            Id = usuario.Id,
-            Login = usuario.Login,
-            Nome = usuario.Nome,
-            Senha = SenhaHash.Gerar(usuario.Senha),
-            Autorizacao = usuario.Autorizacao,
-
-            Ativo = usuario.Ativo
+            Id = usuarioDTO.Id,
+            Login = usuarioDTO.Login,
+            Nome = usuarioDTO.Nome,
+            Senha = SenhaHash.Gerar(usuarioDTO.Senha),
+            Autorizacao = usuarioDTO.Autorizacao,
+            Ativo = usuarioDTO.Ativo
         };
 
-        var usuarioEntity = _mapper.Map<Usuario>(usuarioDTO);
-        await _usuarioRepositorio.Atualizar(usuarioEntity);
+        var usuarios = _mapper.Map<Usuario>(usuarioDTOMap);
+        await _usuarioRepositorio.Atualizar(usuarios);
     }
     public async Task Deletar(int id)
     {
-        var usuarioEntity = PegarPorId(id).Result;
-        if (usuarioEntity is not null)
+        var usuarioDTO = PegarPorId(id).Result;
+        if (usuarioDTO is not null)
         {
-            await _usuarioRepositorio.Deletar(usuarioEntity.Id);
+            await _usuarioRepositorio.Deletar(usuarioDTO.Id);
         }
     }
     public async Task<int> TotalDados(string pesquisa)
@@ -85,26 +84,22 @@ public class UsuarioServico : IUsuarioServico
         var totalUsuario = await _usuarioRepositorio.TotalDados(pesquisa);
         return totalUsuario;
     }
-
-    public async Task<UsuarioOutputDTO> Acessar(AcessoDTO acesso)
+    public async Task<UsuarioOutputDTO> Acessar(AcessoDTO acessoDTO)
     {
-        AcessoDTO acessoDTO = new()
+        AcessoDTO acessoDTOMap = new()
         {
-            Usuario = acesso.Usuario,
-            Senha = SenhaHash.Gerar(acesso.Senha)
+            Usuario = acessoDTO.Usuario,
+            Senha = SenhaHash.Gerar(acessoDTO.Senha)
         };
 
+        var acesso = _mapper.Map<Acesso>(acessoDTOMap);
+        var usuario = await _usuarioRepositorio.Acessar(acesso);
 
-        var acessoEntity = _mapper.Map<Acesso>(acessoDTO);
-        var acessoLogin = await _usuarioRepositorio.Acessar(acessoEntity);
-
-        if (acessoLogin.Login != "")
+        if (usuario.Login != "")
         {
-            var usuarioDTO = await PegarPorLogin(acesso.Usuario);
+            var usuarioDTO = await PegarPorLogin(acessoDTO.Usuario);
             return usuarioDTO;
         }
         return new UsuarioOutputDTO();
     }
-
-
 }

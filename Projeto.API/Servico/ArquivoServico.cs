@@ -17,39 +17,39 @@ public class ArquivoServico : IArquivoServico
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<ArquivoDTO>> PegarTodos(int pagina, int tamanho, string pesquisa)
+    public async Task<IEnumerable<ArquivoOutputDTO>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
-        var arquivoEntity = await _arquivoRepositorio.PegarTodos(pagina, tamanho, pesquisa);
-        return _mapper.Map<IEnumerable<ArquivoDTO>>(arquivoEntity);
+        var arquivos = await _arquivoRepositorio.PegarTodos(pagina, tamanho, pesquisa);
+        return _mapper.Map<IEnumerable<ArquivoOutputDTO>>(arquivos);
     }
-    public async Task<IEnumerable<ArquivoDTO>> PegarTodosAtivos(int pagina, int tamanho, string pesquisa)
+    public async Task<IEnumerable<ArquivoOutputDTO>> PegarTodosAtivos(int pagina, int tamanho, string pesquisa)
     {
-        var arquivoEntityAtivo = await _arquivoRepositorio.PegarTodosAtivos(pagina, tamanho, pesquisa);
-        return _mapper.Map<IEnumerable<ArquivoDTO>>(arquivoEntityAtivo);
+        var arquivosAtivo = await _arquivoRepositorio.PegarTodosAtivos(pagina, tamanho, pesquisa);
+        return _mapper.Map<IEnumerable<ArquivoOutputDTO>>(arquivosAtivo);
     }
-    public async Task<ArquivoDTO> PegarPorId(int id)
+    public async Task<ArquivoOutputDTO> PegarPorId(int id)
     {
-        var arquivoEntity = await _arquivoRepositorio.PegarPorId(id);
-        return _mapper.Map<ArquivoDTO>(arquivoEntity);
+        var arquivo = await _arquivoRepositorio.PegarPorId(id);
+        return _mapper.Map<ArquivoOutputDTO>(arquivo);
 
     }
-    public async Task Criar(ArquivoDTO arquivo)
+    public async Task Criar(ArquivoInputDTO arquivoDTO)
     {
-        var arquivoEntiry = _mapper.Map<Arquivo>(arquivo);
-        await _arquivoRepositorio.Criar(arquivoEntiry);
-        arquivo.Id = arquivoEntiry.Id;
+        var arquivo = _mapper.Map<Arquivo>(arquivoDTO);
+        await _arquivoRepositorio.Criar(arquivo);
+        arquivo.Id = arquivo.Id;
     }
-    public async Task Atualizar(ArquivoDTO arquivo)
+    public async Task Atualizar(ArquivoInputDTO arquivoDTO)
     {
-        var arquivoEntiry = _mapper.Map<Arquivo>(arquivo);
-        await _arquivoRepositorio.Atualizar(arquivoEntiry);
+        var arquivo = _mapper.Map<Arquivo>(arquivoDTO);
+        await _arquivoRepositorio.Atualizar(arquivo);
     }
     public async Task Deletar(int id)
     {
-        var arquivoEntiry = PegarPorId(id).Result;
-        if (arquivoEntiry is not null)
+        var arquivoDTO = PegarPorId(id).Result;
+        if (arquivoDTO is not null)
         {
-            await _arquivoRepositorio.Deletar(arquivoEntiry.Id);
+            await _arquivoRepositorio.Deletar(arquivoDTO.Id);
         }
     }
     public async Task<int> TotalDados(string pesquisa)

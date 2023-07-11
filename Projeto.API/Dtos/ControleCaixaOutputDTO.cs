@@ -1,6 +1,6 @@
 ﻿namespace Projeto.API.Dtos;
 
-public class ControleCaixaDTO
+public class ControleCaixaOutputDTO
 {
     public int Id { get; set; }
     public int NumeroAtual { get; set; }

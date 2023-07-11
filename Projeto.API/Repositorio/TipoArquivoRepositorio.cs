@@ -16,19 +16,19 @@ public class TipoArquivoRepositorio : ITipoArquivoRepositorio
 
     public async Task<IEnumerable<TipoArquivo>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
-        var listTipoArquivo = await _appDbContext.TipoArquivos
+        var tipoArquivos = await _appDbContext.TipoArquivos
             .Where(w => w.Descricao.Contains(pesquisa))
             .OrderBy(o => o.Descricao)
             .Skip((pagina - 1) * tamanho)
             .Take(tamanho)
             .ToListAsync();
 
-        return listTipoArquivo;
+        return tipoArquivos;
 
     }
     public async Task<IEnumerable<TipoArquivo>> PegarTodosAtivos(int pagina, int tamanho, string pesquisa)
     {
-        var listTipoArquivoAtivo = await _appDbContext.TipoArquivos
+        var tipoArquivosAtivo = await _appDbContext.TipoArquivos
             .Where(w => w.Descricao.Contains(pesquisa) &&
                         w.Ativo == true)
             .OrderBy(o => o.Descricao)
@@ -36,7 +36,7 @@ public class TipoArquivoRepositorio : ITipoArquivoRepositorio
             .Take(tamanho)
             .ToListAsync();
 
-        return listTipoArquivoAtivo;
+        return tipoArquivosAtivo;
     }
     public async Task<TipoArquivo> PegarPorId(int id)
     {

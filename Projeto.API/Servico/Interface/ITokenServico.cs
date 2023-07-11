@@ -4,5 +4,5 @@ namespace Projeto.API.Servico.Interface;
 
 public interface ITokenServico
 {
-    Task<string> GerarToken(UsuarioOutputDTO usuario);
+    Task<string> GerarToken(UsuarioOutputDTO usuarioDTO);
 }

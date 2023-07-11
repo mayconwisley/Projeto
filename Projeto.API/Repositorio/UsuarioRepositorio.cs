@@ -13,7 +13,6 @@ public class UsuarioRepositorio : IUsuarioRepositorio
     {
         _appDbContext = appDbContext;
     }
-
     public async Task<IEnumerable<Usuario>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
         var usuarios = await _appDbContext.Usuarios
@@ -58,16 +57,17 @@ public class UsuarioRepositorio : IUsuarioRepositorio
         var usuario = await _appDbContext.Usuarios
             .Where(w => w.Login == login)
             .FirstOrDefaultAsync();
-        Usuario usuario1 = new()
+
+        Usuario usuario1 = new();
+
+        if (usuario is not null)
         {
-            Id = usuario.Id,
-            Nome = usuario.Nome,
-            Login = usuario.Login,
-            Autorizacao = usuario.Autorizacao,
-            Ativo = usuario.Ativo
-
-        };
-
+            usuario1.Id = usuario.Id;
+            usuario1.Nome = usuario.Nome;
+            usuario1.Login = usuario.Login;
+            usuario1.Autorizacao = usuario.Autorizacao;
+            usuario1.Ativo = usuario.Ativo;
+        }
         if (usuario is not null)
         {
             return usuario1;
@@ -91,7 +91,6 @@ public class UsuarioRepositorio : IUsuarioRepositorio
 
         return new Usuario();
     }
-
     public async Task<Usuario> Criar(Usuario usuario)
     {
         if (usuario is not null)
@@ -133,6 +132,4 @@ public class UsuarioRepositorio : IUsuarioRepositorio
 
         return totalUsuario;
     }
-
-
 }

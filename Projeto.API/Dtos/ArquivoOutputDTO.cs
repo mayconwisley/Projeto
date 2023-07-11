@@ -2,7 +2,7 @@
 
 namespace Projeto.API.Dtos;
 
-public class ArquivoDTO
+public class ArquivoOutputDTO
 {
     public int Id { get; set; }
     public string Descricao { get; set; } = string.Empty;
