@@ -17,6 +17,10 @@ public class ProcessoRepositorio : IProcessoRepositorio
     public async Task<IEnumerable<Processo>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
         var processos = await _appDbContext.Processos
+            .Include(i => i.ItemArquivo)
+            .Include(i => i.ItemArquivo.Arquivo)
+            .Include(i => i.ItemArquivo.Arquivo.TipoArquivo)
+            .Include(i => i.ItemArquivo.Arquivo.Usuario)
             .Where(w => w.Descricao.Contains(pesquisa))
             .OrderBy(o => o.Descricao)
             .Skip((pagina - 1) * tamanho)
@@ -29,6 +33,10 @@ public class ProcessoRepositorio : IProcessoRepositorio
     public async Task<Processo> PegarPorId(int id)
     {
         var processo = await _appDbContext.Processos
+            .Include(i => i.ItemArquivo)
+            .Include(i => i.ItemArquivo.Arquivo)
+            .Include(i => i.ItemArquivo.Arquivo.TipoArquivo)
+            .Include(i => i.ItemArquivo.Arquivo.Usuario)
             .Where(w => w.Id == id)
             .FirstOrDefaultAsync();
 

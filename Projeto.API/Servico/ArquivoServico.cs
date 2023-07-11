@@ -37,7 +37,7 @@ public class ArquivoServico : IArquivoServico
     {
         var arquivo = _mapper.Map<Arquivo>(arquivoDTO);
         await _arquivoRepositorio.Criar(arquivo);
-        arquivo.Id = arquivo.Id;
+        arquivoDTO.Id = arquivo.Id;
     }
     public async Task Atualizar(ArquivoInputDTO arquivoDTO)
     {

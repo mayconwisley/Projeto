@@ -17,6 +17,8 @@ public class ArquivoRepositorio : IArquivoRepositorio
     public async Task<IEnumerable<Arquivo>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
         var arquivos = await _appDbContext.Arquivos
+            .Include(i => i.TipoArquivo)
+            .Include(i => i.Usuario)
             .Where(w => w.Descricao.Contains(pesquisa))
             .OrderByDescending(o => o.Competencia)
             .ThenBy(t => t.Descricao)
@@ -30,6 +32,8 @@ public class ArquivoRepositorio : IArquivoRepositorio
     public async Task<IEnumerable<Arquivo>> PegarTodosAtivos(int pagina, int tamanho, string pesquisa)
     {
         var arquivosAtivo = await _appDbContext.Arquivos
+            .Include(i => i.TipoArquivo)
+            .Include(i => i.Usuario)
             .Where(w => w.Descricao.Contains(pesquisa))
             .OrderByDescending(o => o.Competencia)
             .ThenBy(t => t.Descricao)
@@ -42,6 +46,8 @@ public class ArquivoRepositorio : IArquivoRepositorio
     public async Task<Arquivo> PegarPorId(int id)
     {
         var arquivo = await _appDbContext.Arquivos
+            .Include(i => i.TipoArquivo)
+            .Include(i => i.Usuario)
             .Where(w => w.Id == id)
             .FirstOrDefaultAsync();
 

@@ -89,6 +89,8 @@ builder.Services.AddScoped<IItemArquivoRepositorio, ItemArquivoRepositorio>();
 builder.Services.AddScoped<IItemArquivoServico, ItemArquivoServico>();
 builder.Services.AddScoped<IProcessoRepositorio, ProcessoRepositorio>();
 builder.Services.AddScoped<IProcessoServico, ProcessoServico>();
+builder.Services.AddScoped<IArquivoRepositorio, ArquivoRepositorio>();
+builder.Services.AddScoped<IArquivoServico, ArquivoServico>();
 
 builder.Services.AddDbContext<AppDbContext>(cd => cd.UseSqlServer(strDataBase));
 

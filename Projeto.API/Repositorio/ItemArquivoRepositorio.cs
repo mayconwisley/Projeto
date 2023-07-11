@@ -17,6 +17,7 @@ public class ItemArquivoRepositorio : IItemArquivoRepositorio
     public async Task<IEnumerable<ItemArquivo>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
         var itemArquivos = await _appDbContext.ItemArquivos
+            .Include(a => a.Arquivo)
             .Where(w => w.Descricao.Contains(pesquisa))
             .OrderBy(o => o.Descricao)
             .Skip((pagina - 1) * tamanho)
@@ -29,6 +30,7 @@ public class ItemArquivoRepositorio : IItemArquivoRepositorio
     public async Task<ItemArquivo> PegarPorId(int id)
     {
         var itemArquivo = await _appDbContext.ItemArquivos
+            .Include(a => a.Arquivo)
             .Where(w => w.Id == id)
             .FirstOrDefaultAsync();
 

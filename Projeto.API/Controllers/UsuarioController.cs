@@ -70,28 +70,28 @@ public class UsuarioController : ControllerBase
     }
     [HttpPost]
     [Authorize(Roles = "Administrador")]
-    public async Task<ActionResult<UsuarioInputDTO>> Post([FromBody] UsuarioInputDTO usuario)
+    public async Task<ActionResult<UsuarioInputDTO>> Post([FromBody] UsuarioInputDTO usuarioDTO)
     {
-        if (usuario is not null)
+        if (usuarioDTO is not null)
         {
-            await _usuarioServico.Criar(usuario);
-            return new CreatedAtRouteResult("PegarUsuario", new { id = usuario.Id }, usuario);
+            await _usuarioServico.Criar(usuarioDTO);
+            return new CreatedAtRouteResult("PegarUsuario", new { id = usuarioDTO.Id }, usuarioDTO);
         }
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
     [Authorize(Roles = "Administrador")]
-    public async Task<ActionResult<UsuarioInputDTO>> Put(int id, [FromBody] UsuarioInputDTO usuario)
+    public async Task<ActionResult<UsuarioInputDTO>> Put(int id, [FromBody] UsuarioInputDTO usuarioDTO)
     {
-        if (id != usuario.Id)
+        if (id != usuarioDTO.Id)
         {
             return BadRequest("Dados Incorretos");
         }
 
-        if (usuario is not null)
+        if (usuarioDTO is not null)
         {
-            await _usuarioServico.Atualizar(usuario);
-            return Ok(usuario);
+            await _usuarioServico.Atualizar(usuarioDTO);
+            return Ok(usuarioDTO);
         }
         return BadRequest("Dados Incorretos");
     }
@@ -99,11 +99,11 @@ public class UsuarioController : ControllerBase
     [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<UsuarioOutputDTO>> Delete(int id)
     {
-        var usuario = await _usuarioServico.PegarPorId(id);
-        if (usuario is not null)
+        var usuarioDTO = await _usuarioServico.PegarPorId(id);
+        if (usuarioDTO is not null)
         {
             await _usuarioServico.Deletar(id);
-            return Ok(usuario);
+            return Ok(usuarioDTO);
         }
         return NotFound("Dados Não Encontrado");
     }

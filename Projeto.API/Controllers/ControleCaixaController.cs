@@ -50,28 +50,28 @@ public class ControleCaixaController : ControllerBase
     }
     [HttpPost]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<ControleCaixaInputDTO>> Post([FromBody] ControleCaixaInputDTO controleCaixa)
+    public async Task<ActionResult<ControleCaixaInputDTO>> Post([FromBody] ControleCaixaInputDTO controleCaixaDTO)
     {
-        if (controleCaixa is not null)
+        if (controleCaixaDTO is not null)
         {
-            await _controleCaixaServico.Criar(controleCaixa);
-            return new CreatedAtRouteResult("PegarControleCaixa", new { id = controleCaixa.Id }, controleCaixa);
+            await _controleCaixaServico.Criar(controleCaixaDTO);
+            return new CreatedAtRouteResult("PegarControleCaixa", new { id = controleCaixaDTO.Id }, controleCaixaDTO);
         }
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<ControleCaixaInputDTO>> Put(int id, [FromBody] ControleCaixaInputDTO controleCaixa)
+    public async Task<ActionResult<ControleCaixaInputDTO>> Put(int id, [FromBody] ControleCaixaInputDTO controleCaixaDTO)
     {
-        if (id != controleCaixa.Id)
+        if (id != controleCaixaDTO.Id)
         {
             return BadRequest("Dados Incorretos");
         }
 
-        if (controleCaixa is not null)
+        if (controleCaixaDTO is not null)
         {
-            await _controleCaixaServico.Atualizar(controleCaixa);
-            return Ok(controleCaixa);
+            await _controleCaixaServico.Atualizar(controleCaixaDTO);
+            return Ok(controleCaixaDTO);
         }
         return BadRequest("Dados Incorretos");
     }
@@ -79,11 +79,11 @@ public class ControleCaixaController : ControllerBase
     [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<ControleCaixaOutputDTO>> Delete(int id)
     {
-        var controleCaixa = await _controleCaixaServico.PegarPorId(id);
-        if (controleCaixa is not null)
+        var controleCaixaDTO = await _controleCaixaServico.PegarPorId(id);
+        if (controleCaixaDTO is not null)
         {
             await _controleCaixaServico.Deletar(id);
-            return Ok(controleCaixa);
+            return Ok(controleCaixaDTO);
         }
         return NotFound("Dados Não Encontrado");
     }

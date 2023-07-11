@@ -18,22 +18,22 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<UsuarioOutputDTO>> Post([FromBody] AcessoDTO acesso)
+    public async Task<ActionResult<UsuarioOutputDTO>> Post([FromBody] LoginDTO acessoDTO)
     {
-        if (acesso is not null)
+        if (acessoDTO is not null)
         {
-            var usuario = await _usuarioServico.Acessar(acesso);
+            var usuarioDTO = await _usuarioServico.Acessar(acessoDTO);
 
-            if (usuario.Login == "")
+            if (usuarioDTO.Login == "")
             {
-                return NotFound("Usuário ou Senha Inválidos");
+                return NotFound("Login ou Senha Inválidos");
             }
 
-            string token = await _tokenServico.GerarToken(usuario);
+            string token = await _tokenServico.GerarToken(usuarioDTO);
 
             return Ok(new
             {
-                usuario,
+                usuarioDTO,
                 token
             });
         }

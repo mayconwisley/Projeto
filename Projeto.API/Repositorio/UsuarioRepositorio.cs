@@ -80,7 +80,7 @@ public class UsuarioRepositorio : IUsuarioRepositorio
     public async Task<Usuario> Acessar(Acesso acesso)
     {
         var usuario = await _appDbContext.Usuarios
-            .Where(w => w.Login == acesso.Usuario &&
+            .Where(w => w.Login == acesso.Login &&
                         w.Senha == acesso.Senha)
             .FirstOrDefaultAsync();
 

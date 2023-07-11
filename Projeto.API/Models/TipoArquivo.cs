@@ -11,4 +11,7 @@ public class TipoArquivo
     public bool SuporteItem { get; set; }
     public bool SuporteControleCaixa { get; set; }
     public bool Ativo { get; set; } = true;
+    public virtual IEnumerable<Arquivo>? Arquivos { get; set; }
+    public virtual ControleCaixa? ControleCaixa { get; set; }
+
 }

@@ -10,4 +10,5 @@ public class Usuario
     public AutorizacaoEnum Autorizacao { get; set; }
     public string Senha { get; set; } = string.Empty;
     public bool Ativo { get; set; } = true;
+    public virtual IEnumerable<Arquivo>? Arquivos { get; set; }
 }

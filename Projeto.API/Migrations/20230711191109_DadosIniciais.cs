@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Projeto.API.Migrations
 {
     /// <inheritdoc />
-    public partial class CriarTabelasArquivos : Migration
+    public partial class DadosIniciais : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,8 +37,7 @@ namespace Projeto.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Login = table.Column<string>(type: "VARCHAR(255)", nullable: false),
                     Nome = table.Column<string>(type: "VARCHAR(255)", nullable: false),
-                    Nivel = table.Column<string>(type: "VARCHAR(100)", nullable: false),
-                    Chave = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
+                    Autorizacao = table.Column<int>(type: "int", nullable: false),
                     Senha = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -77,15 +77,15 @@ namespace Projeto.API.Migrations
                     DataCadastro = table.Column<DateTime>(type: "DATETIME", nullable: false),
                     DataVencimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    Arquitetura = table.Column<int>(type: "int", nullable: true),
-                    Pratelheira = table.Column<string>(type: "VARCHAR(10)", nullable: true),
-                    PratelheiraLinha = table.Column<string>(type: "VARCHAR(10)", nullable: true),
-                    PratelheiraColuna = table.Column<string>(type: "VARCHAR(10)", nullable: true),
-                    Armario = table.Column<string>(type: "VARCHAR(10)", nullable: true),
-                    Gaveta = table.Column<string>(type: "VARCHAR(10)", nullable: true),
+                    Arquitetura = table.Column<int>(type: "int", nullable: false),
+                    Pratelheira = table.Column<string>(type: "VARCHAR(10)", nullable: false),
+                    PratelheiraLinha = table.Column<string>(type: "VARCHAR(10)", nullable: false),
+                    PratelheiraColuna = table.Column<string>(type: "VARCHAR(10)", nullable: false),
+                    Armario = table.Column<string>(type: "VARCHAR(10)", nullable: false),
+                    Gaveta = table.Column<string>(type: "VARCHAR(10)", nullable: false),
                     DataDescarte = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NumCaixa = table.Column<int>(type: "int", nullable: false),
-                    DataUltimAtualizacao = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    NumeroCaixa = table.Column<int>(type: "int", nullable: false),
+                    DataUltimaAtualizacao = table.Column<DateTime>(type: "DATETIME", nullable: false),
                     PrimeiroUsuarioCadastro = table.Column<string>(type: "VARCHAR(255)", nullable: false),
                     UltimoUsuarioAtualizar = table.Column<string>(type: "VARCHAR(255)", nullable: false),
                     TipoArquivoId = table.Column<int>(type: "int", nullable: false),
@@ -114,7 +114,7 @@ namespace Projeto.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CodigoItem = table.Column<string>(type: "VARCHAR(255)", nullable: true),
+                    CodigoItem = table.Column<string>(type: "VARCHAR(255)", nullable: false),
                     Descricao = table.Column<string>(type: "VARCHAR(500)", nullable: false),
                     NoArquivo = table.Column<bool>(type: "bit", nullable: false),
                     ArquivoId = table.Column<int>(type: "int", nullable: false)
@@ -138,7 +138,7 @@ namespace Projeto.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DataEnvio = table.Column<DateTime>(type: "DATETIME", nullable: false),
                     ParaQuem = table.Column<string>(type: "VARCHAR(255)", nullable: false),
-                    Descricao = table.Column<string>(type: "VARCHAR(255)", nullable: false),
+                    Descricao = table.Column<string>(type: "VARCHAR(500)", nullable: false),
                     Status = table.Column<string>(type: "VARCHAR(255)", nullable: false),
                     ItemArquivoId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -153,6 +153,11 @@ namespace Projeto.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Usuarios",
+                columns: new[] { "Id", "Ativo", "Autorizacao", "Login", "Nome", "Senha" },
+                values: new object[] { 1, true, 0, "Admin", "Adminstrador", "a60c1f75938be9607b94620c8925defe4d471cab0cab591fb418e89ff04b8ae7" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Arquivos_TipoArquivoId",
                 table: "Arquivos",
@@ -166,7 +171,8 @@ namespace Projeto.API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ControleCaixas_TipoArquivoId",
                 table: "ControleCaixas",
-                column: "TipoArquivoId");
+                column: "TipoArquivoId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemArquivos_ArquivoId",
@@ -177,6 +183,12 @@ namespace Projeto.API.Migrations
                 name: "IX_Processos_ItemArquivoId",
                 table: "Processos",
                 column: "ItemArquivoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_Login",
+                table: "Usuarios",
+                column: "Login",
+                unique: true);
         }
 
         /// <inheritdoc />

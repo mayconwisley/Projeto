@@ -84,11 +84,11 @@ public class UsuarioServico : IUsuarioServico
         var totalUsuario = await _usuarioRepositorio.TotalDados(pesquisa);
         return totalUsuario;
     }
-    public async Task<UsuarioOutputDTO> Acessar(AcessoDTO acessoDTO)
+    public async Task<UsuarioOutputDTO> Acessar(LoginDTO acessoDTO)
     {
-        AcessoDTO acessoDTOMap = new()
+        LoginDTO acessoDTOMap = new()
         {
-            Usuario = acessoDTO.Usuario,
+            Login = acessoDTO.Login,
             Senha = SenhaHash.Gerar(acessoDTO.Senha)
         };
 
@@ -97,7 +97,7 @@ public class UsuarioServico : IUsuarioServico
 
         if (usuario.Login != "")
         {
-            var usuarioDTO = await PegarPorLogin(acessoDTO.Usuario);
+            var usuarioDTO = await PegarPorLogin(acessoDTO.Login);
             return usuarioDTO;
         }
         return new UsuarioOutputDTO();

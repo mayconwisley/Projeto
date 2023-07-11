@@ -40,37 +40,37 @@ public class ItemArquivoController : ControllerBase
     [Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ItemArquivoOutputDTO>> PegarPorId(int id)
     {
-        var itemArquivo = await _itemArquivoServico.PegarPorId(id);
-        if (itemArquivo is not null)
+        var itemArquivoDTO = await _itemArquivoServico.PegarPorId(id);
+        if (itemArquivoDTO is not null)
         {
-            return Ok(itemArquivo);
+            return Ok(itemArquivoDTO);
         }
         return NotFound("Dados não encontrado");
     }
     [HttpPost]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<ItemArquivoInputDTO>> Post([FromBody] ItemArquivoInputDTO itemArquivo)
+    public async Task<ActionResult<ItemArquivoInputDTO>> Post([FromBody] ItemArquivoInputDTO itemArquivoDTO)
     {
-        if (itemArquivo is not null)
+        if (itemArquivoDTO is not null)
         {
-            await _itemArquivoServico.Criar(itemArquivo);
-            return new CreatedAtRouteResult("PegarItemArquivo", new { id = itemArquivo.Id }, itemArquivo);
+            await _itemArquivoServico.Criar(itemArquivoDTO);
+            return new CreatedAtRouteResult("PegarItemArquivo", new { id = itemArquivoDTO.Id }, itemArquivoDTO);
         }
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<ItemArquivoInputDTO>> Put(int id, [FromBody] ItemArquivoInputDTO itemArquivo)
+    public async Task<ActionResult<ItemArquivoInputDTO>> Put(int id, [FromBody] ItemArquivoInputDTO itemArquivoDTO)
     {
-        if (id != itemArquivo.Id)
+        if (id != itemArquivoDTO.Id)
         {
             return BadRequest("Dados Incorretos");
         }
 
-        if (itemArquivo is not null)
+        if (itemArquivoDTO is not null)
         {
-            await _itemArquivoServico.Atualizar(itemArquivo);
-            return Ok(itemArquivo);
+            await _itemArquivoServico.Atualizar(itemArquivoDTO);
+            return Ok(itemArquivoDTO);
         }
         return BadRequest("Dados Incorretos");
     }
@@ -78,11 +78,11 @@ public class ItemArquivoController : ControllerBase
     [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<ItemArquivoOutputDTO>> Delete(int id)
     {
-        var itemArquivo = await _itemArquivoServico.PegarPorId(id);
-        if (itemArquivo is not null)
+        var itemArquivoDTO = await _itemArquivoServico.PegarPorId(id);
+        if (itemArquivoDTO is not null)
         {
             await _itemArquivoServico.Deletar(id);
-            return Ok(itemArquivo);
+            return Ok(itemArquivoDTO);
         }
         return NotFound("Dados Não Encontrado");
     }

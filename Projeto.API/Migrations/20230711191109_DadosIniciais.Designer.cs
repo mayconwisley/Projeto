@@ -12,8 +12,8 @@ using Projeto.API.DataContext;
 namespace Projeto.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230710192434_AjusteTabelaUsuario1")]
-    partial class AjusteTabelaUsuario1
+    [Migration("20230711191109_DadosIniciais")]
+    partial class DadosIniciais
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,9 +34,10 @@ namespace Projeto.API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Armario")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(10)");
 
-                    b.Property<int?>("Arquitetura")
+                    b.Property<int>("Arquitetura")
                         .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
@@ -51,7 +52,7 @@ namespace Projeto.API.Migrations
                     b.Property<DateTime>("DataDescarte")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataUltimAtualizacao")
+                    b.Property<DateTime>("DataUltimaAtualizacao")
                         .HasColumnType("DATETIME");
 
                     b.Property<DateTime>("DataVencimento")
@@ -62,18 +63,22 @@ namespace Projeto.API.Migrations
                         .HasColumnType("VARCHAR(500)");
 
                     b.Property<string>("Gaveta")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(10)");
 
-                    b.Property<int>("NumCaixa")
+                    b.Property<int>("NumeroCaixa")
                         .HasColumnType("int");
 
                     b.Property<string>("Pratelheira")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(10)");
 
                     b.Property<string>("PratelheiraColuna")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(10)");
 
                     b.Property<string>("PratelheiraLinha")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(10)");
 
                     b.Property<string>("PrimeiroUsuarioCadastro")
@@ -115,7 +120,8 @@ namespace Projeto.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoArquivoId");
+                    b.HasIndex("TipoArquivoId")
+                        .IsUnique();
 
                     b.ToTable("ControleCaixas");
                 });
@@ -132,6 +138,7 @@ namespace Projeto.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CodigoItem")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("Descricao")
@@ -161,7 +168,7 @@ namespace Projeto.API.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(255)");
+                        .HasColumnType("VARCHAR(500)");
 
                     b.Property<int>("ItemArquivoId")
                         .HasColumnType("int");
@@ -247,18 +254,29 @@ namespace Projeto.API.Migrations
                         .IsUnique();
 
                     b.ToTable("Usuarios");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ativo = true,
+                            Autorizacao = 0,
+                            Login = "Admin",
+                            Nome = "Adminstrador",
+                            Senha = "a60c1f75938be9607b94620c8925defe4d471cab0cab591fb418e89ff04b8ae7"
+                        });
                 });
 
             modelBuilder.Entity("Projeto.API.Models.Arquivo", b =>
                 {
                     b.HasOne("Projeto.API.Models.TipoArquivo", "TipoArquivo")
-                        .WithMany()
+                        .WithMany("Arquivos")
                         .HasForeignKey("TipoArquivoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Projeto.API.Models.Usuario", "Usuario")
-                        .WithMany()
+                        .WithMany("Arquivos")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -271,8 +289,8 @@ namespace Projeto.API.Migrations
             modelBuilder.Entity("Projeto.API.Models.ControleCaixa", b =>
                 {
                     b.HasOne("Projeto.API.Models.TipoArquivo", "TipoArquivo")
-                        .WithMany()
-                        .HasForeignKey("TipoArquivoId")
+                        .WithOne("ControleCaixa")
+                        .HasForeignKey("Projeto.API.Models.ControleCaixa", "TipoArquivoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -299,6 +317,18 @@ namespace Projeto.API.Migrations
                         .IsRequired();
 
                     b.Navigation("ItemArquivo");
+                });
+
+            modelBuilder.Entity("Projeto.API.Models.TipoArquivo", b =>
+                {
+                    b.Navigation("Arquivos");
+
+                    b.Navigation("ControleCaixa");
+                });
+
+            modelBuilder.Entity("Projeto.API.Models.Usuario", b =>
+                {
+                    b.Navigation("Arquivos");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,6 +11,6 @@ public interface IUsuarioServico
     Task Criar(UsuarioInputDTO usuarioDTO);
     Task Atualizar(UsuarioInputDTO usuarioDTO);
     Task Deletar(int id);
-    Task<UsuarioOutputDTO> Acessar(AcessoDTO acessoDTO);
+    Task<UsuarioOutputDTO> Acessar(LoginDTO acessoDTO);
     Task<int> TotalDados(string pesquisa);
 }

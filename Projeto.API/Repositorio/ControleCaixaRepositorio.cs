@@ -17,7 +17,7 @@ public class ControleCaixaRepositorio : IControleCaixaRepositorio
     public async Task<IEnumerable<ControleCaixa>> PegarTodos(int pagina, int tamanho, string pesquisa)
     {
         var controleCaixas = await _appDbContext.ControleCaixas
-            .OrderBy(o => o.TipoArquivo.Descricao)
+            .Include(i => i.TipoArquivo)
             .Skip((pagina - 1) * tamanho)
             .Take(tamanho)
             .ToListAsync();
@@ -28,6 +28,7 @@ public class ControleCaixaRepositorio : IControleCaixaRepositorio
     public async Task<ControleCaixa> PegarPorId(int id)
     {
         var controleCaixa = await _appDbContext.ControleCaixas
+            .Include(i => i.TipoArquivo)
             .Where(w => w.Id == id)
             .FirstOrDefaultAsync();
 

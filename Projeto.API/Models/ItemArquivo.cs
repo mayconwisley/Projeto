@@ -7,5 +7,5 @@ public class ItemArquivo
     public string Descricao { get; set; } = string.Empty;
     public bool NoArquivo { get; set; }
     public int ArquivoId { get; set; }
-    public Arquivo Arquivo { get; set; } = new Arquivo();
+    public Arquivo? Arquivo { get; set; }
 }

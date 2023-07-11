@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Projeto.API.Dtos;
 using Projeto.API.Servico.Interface;
-using System.Data;
 
 namespace Projeto.API.Controllers;
 
@@ -42,37 +40,37 @@ public class ProcessoController : ControllerBase
     [Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ProcessoOutputDTO>> PegarPorId(int id)
     {
-        var processo = await _processoServico.PegarPorId(id);
-        if (processo is not null)
+        var processoDTO = await _processoServico.PegarPorId(id);
+        if (processoDTO is not null)
         {
-            return Ok(processo);
+            return Ok(processoDTO);
         }
         return NotFound("Dados não encontrado");
     }
     [HttpPost]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<ProcessoInputDTO>> Post([FromBody] ProcessoInputDTO processo)
+    public async Task<ActionResult<ProcessoInputDTO>> Post([FromBody] ProcessoInputDTO processoDTO)
     {
-        if (processo is not null)
+        if (processoDTO is not null)
         {
-            await _processoServico.Criar(processo);
-            return new CreatedAtRouteResult("PegarProcesso", new { id = processo.Id }, processo);
+            await _processoServico.Criar(processoDTO);
+            return new CreatedAtRouteResult("PegarProcesso", new { id = processoDTO.Id }, processoDTO);
         }
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<ProcessoInputDTO>> Put(int id, [FromBody] ProcessoInputDTO processo)
+    public async Task<ActionResult<ProcessoInputDTO>> Put(int id, [FromBody] ProcessoInputDTO processoDTO)
     {
-        if (id != processo.Id)
+        if (id != processoDTO.Id)
         {
             return BadRequest("Dados Incorretos");
         }
 
-        if (processo is not null)
+        if (processoDTO is not null)
         {
-            await _processoServico.Atualizar(processo);
-            return Ok(processo);
+            await _processoServico.Atualizar(processoDTO);
+            return Ok(processoDTO);
         }
         return BadRequest("Dados Incorretos");
     }
@@ -80,11 +78,11 @@ public class ProcessoController : ControllerBase
     [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<ProcessoOutputDTO>> Delete(int id)
     {
-        var processo = await _processoServico.PegarPorId(id);
-        if (processo is not null)
+        var processoDTO = await _processoServico.PegarPorId(id);
+        if (processoDTO is not null)
         {
             await _processoServico.Deletar(id);
-            return Ok(processo);
+            return Ok(processoDTO);
         }
         return NotFound("Dados Não Encontrado");
     }

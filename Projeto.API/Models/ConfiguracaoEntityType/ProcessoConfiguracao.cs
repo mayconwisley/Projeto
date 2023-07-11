@@ -11,7 +11,7 @@ public class ProcessoConfiguracao : IEntityTypeConfiguration<Processo>
             .HasColumnType("VARCHAR(255)")
             .IsRequired();
         builder.Property(p => p.Descricao)
-            .HasColumnType("VARCHAR(255)")
+            .HasColumnType("VARCHAR(500)")
             .IsRequired();
         builder.Property(p => p.Status)
             .HasColumnType("VARCHAR(255)")

@@ -8,5 +8,5 @@ public class Processo
     public string Descricao { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
     public int ItemArquivoId { get; set; }
-    public ItemArquivo ItemArquivo { get; set; } = new ItemArquivo();
+    public ItemArquivo? ItemArquivo { get; set; }
 }

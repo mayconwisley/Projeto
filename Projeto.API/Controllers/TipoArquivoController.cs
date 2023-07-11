@@ -70,28 +70,28 @@ public class TipoArquivoController : ControllerBase
     }
     [HttpPost]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<TipoArquivoDTO>> Post([FromBody] TipoArquivoDTO tipoArquivo)
+    public async Task<ActionResult<TipoArquivoDTO>> Post([FromBody] TipoArquivoDTO tipoArquivoDTO)
     {
-        if (tipoArquivo is not null)
+        if (tipoArquivoDTO is not null)
         {
-            await _tipoArquivoServico.Criar(tipoArquivo);
-            return new CreatedAtRouteResult("PegarTipoArquivo", new { id = tipoArquivo.Id }, tipoArquivo);
+            await _tipoArquivoServico.Criar(tipoArquivoDTO);
+            return new CreatedAtRouteResult("PegarTipoArquivo", new { id = tipoArquivoDTO.Id }, tipoArquivoDTO);
         }
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<TipoArquivoDTO>> Put(int id, [FromBody] TipoArquivoDTO tipoArquivo)
+    public async Task<ActionResult<TipoArquivoDTO>> Put(int id, [FromBody] TipoArquivoDTO tipoArquivoDTO)
     {
-        if (id != tipoArquivo.Id)
+        if (id != tipoArquivoDTO.Id)
         {
             return BadRequest("Dados Incorretos");
         }
 
-        if (tipoArquivo is not null)
+        if (tipoArquivoDTO is not null)
         {
-            await _tipoArquivoServico.Atualizar(tipoArquivo);
-            return Ok(tipoArquivo);
+            await _tipoArquivoServico.Atualizar(tipoArquivoDTO);
+            return Ok(tipoArquivoDTO);
         }
         return BadRequest("Dados Incorretos");
     }
@@ -99,11 +99,11 @@ public class TipoArquivoController : ControllerBase
     [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<TipoArquivoDTO>> Delete(int id)
     {
-        var tipoArquivo = await _tipoArquivoServico.PegarPorId(id);
-        if (tipoArquivo is not null)
+        var tipoArquivoDTO = await _tipoArquivoServico.PegarPorId(id);
+        if (tipoArquivoDTO is not null)
         {
             await _tipoArquivoServico.Deletar(id);
-            return Ok(tipoArquivo);
+            return Ok(tipoArquivoDTO);
         }
         return NotFound("Dados Não Encontrado");
     }

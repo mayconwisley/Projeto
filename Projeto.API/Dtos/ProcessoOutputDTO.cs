@@ -8,5 +8,5 @@ public class ProcessoOutputDTO
     public string Descricao { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
     public int ItemArquivoId { get; set; }
-    public ItemArquivoOutputDTO ItemArquivo { get; set; } = new ItemArquivoOutputDTO();
+    public ItemArquivoOutputDTO? ItemArquivo { get; set; }
 }

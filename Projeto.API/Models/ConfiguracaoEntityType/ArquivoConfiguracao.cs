@@ -32,7 +32,7 @@ public class ArquivoConfiguracao : IEntityTypeConfiguration<Arquivo>
         builder.Property(p => p.DataCadastro)
             .HasColumnType("DATETIME")
             .IsRequired();
-        builder.Property(p => p.DataUltimAtualizacao)
+        builder.Property(p => p.DataUltimaAtualizacao)
             .HasColumnType("DATETIME")
             .IsRequired();
 
