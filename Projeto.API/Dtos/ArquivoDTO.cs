@@ -1,8 +1,8 @@
 ﻿using Projeto.API.Models.Enum;
 
-namespace Projeto.API.Models;
+namespace Projeto.API.Dtos;
 
-public class Arquivo
+public class ArquivoDTO
 {
     public int Id { get; set; }
     public string Descricao { get; set; } = string.Empty;
@@ -23,7 +23,7 @@ public class Arquivo
     public string UltimoUsuarioAtualizar { get; set; } = string.Empty;
 
     public int TipoArquivoId { get; set; }
-    public TipoArquivo TipoArquivo { get; set; } = new TipoArquivo();
+    public TipoArquivoDTO TipoArquivo { get; set; } = new TipoArquivoDTO();
     public int UsuarioId { get; set; }
-    public Usuario Usuario { get; set; } = new Usuario();
+    public UsuarioOutputDTO Usuario { get; set; } = new UsuarioOutputDTO();
 }

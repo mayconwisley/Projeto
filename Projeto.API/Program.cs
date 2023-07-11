@@ -86,6 +86,8 @@ builder.Services.AddScoped<ITipoArquivoServico, TipoArquivoServico>();
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IUsuarioServico, UsuarioServico>();
 builder.Services.AddScoped<ITokenServico, TokenServico>();
+builder.Services.AddScoped<IControleCaixaRepositorio, ControleCaixaRepositorio>();
+builder.Services.AddScoped<IControleCaixaServico, ControleCaixaServico>();
 
 builder.Services.AddDbContext<AppDbContext>(cd => cd.UseSqlServer(strDataBase));
 

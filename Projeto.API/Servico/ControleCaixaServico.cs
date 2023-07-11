@@ -30,30 +30,15 @@ public class ControleCaixaServico : IControleCaixaServico
     }
     public async Task Criar(ControleCaixaDTO controleCaixa)
     {
-        ControleCaixaDTO controleCaixaDTO = new()
-        {
-            Id = controleCaixa.Id,
-            NumeroAtual = controleCaixa.NumeroAtual,
-            TipoArquivoId = controleCaixa.TipoArquivoId,
-            TipoArquivo = controleCaixa.TipoArquivo
-        };
 
-        var controleCaixaEntiry = _mapper.Map<ControleCaixa>(controleCaixaDTO);
+        var controleCaixaEntiry = _mapper.Map<ControleCaixa>(controleCaixa);
         await _controleCaixaRepositorio.Criar(controleCaixaEntiry);
-        controleCaixaDTO.Id = controleCaixaEntiry.Id;
+        controleCaixa.Id = controleCaixaEntiry.Id;
 
     }
     public async Task Atualizar(ControleCaixaDTO controleCaixa)
     {
-        ControleCaixaDTO controleCaixaDTO = new()
-        {
-            Id = controleCaixa.Id,
-            NumeroAtual = controleCaixa.NumeroAtual,
-            TipoArquivoId = controleCaixa.TipoArquivoId,
-            TipoArquivo = controleCaixa.TipoArquivo
-        };
-
-        var controleCaixaEntiry = _mapper.Map<ControleCaixa>(controleCaixaDTO);
+        var controleCaixaEntiry = _mapper.Map<ControleCaixa>(controleCaixa);
         await _controleCaixaRepositorio.Atualizar(controleCaixaEntiry);
     }
     public async Task Deletar(int id)

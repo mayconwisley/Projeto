@@ -11,11 +11,11 @@ public class ControleCaixaController : ControllerBase
 {
     private readonly IControleCaixaServico _controleCaixaServico;
 
-    public ControleCaixaController(IControleCaixaServico tipoArquivoServico)
+    public ControleCaixaController(IControleCaixaServico controleCaixaServico)
     {
-        _controleCaixaServico = tipoArquivoServico;
+        _controleCaixaServico = controleCaixaServico;
     }
-   
+
     [HttpGet]
     [Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ControleCaixaDTO>> PegarTodos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
@@ -50,28 +50,28 @@ public class ControleCaixaController : ControllerBase
     }
     [HttpPost]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<ControleCaixaDTO>> Post([FromBody] ControleCaixaDTO tipoArquivo)
+    public async Task<ActionResult<ControleCaixaDTO>> Post([FromBody] ControleCaixaDTO controleCaixa)
     {
-        if (tipoArquivo is not null)
+        if (controleCaixa is not null)
         {
-            await _controleCaixaServico.Criar(tipoArquivo);
-            return new CreatedAtRouteResult("PegarControleCaixa", new { id = tipoArquivo.Id }, tipoArquivo);
+            await _controleCaixaServico.Criar(controleCaixa);
+            return new CreatedAtRouteResult("PegarControleCaixa", new { id = controleCaixa.Id }, controleCaixa);
         }
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
     [Authorize(Roles = "Administrador, Operador")]
-    public async Task<ActionResult<ControleCaixaDTO>> Put(int id, [FromBody] ControleCaixaDTO tipoArquivo)
+    public async Task<ActionResult<ControleCaixaDTO>> Put(int id, [FromBody] ControleCaixaDTO controleCaixa)
     {
-        if (id != tipoArquivo.Id)
+        if (id != controleCaixa.Id)
         {
             return BadRequest("Dados Incorretos");
         }
 
-        if (tipoArquivo is not null)
+        if (controleCaixa is not null)
         {
-            await _controleCaixaServico.Atualizar(tipoArquivo);
-            return Ok(tipoArquivo);
+            await _controleCaixaServico.Atualizar(controleCaixa);
+            return Ok(controleCaixa);
         }
         return BadRequest("Dados Incorretos");
     }
@@ -79,11 +79,11 @@ public class ControleCaixaController : ControllerBase
     [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<ControleCaixaDTO>> Delete(int id)
     {
-        var tipoArquivo = await _controleCaixaServico.PegarPorId(id);
-        if (tipoArquivo is not null)
+        var controleCaixa = await _controleCaixaServico.PegarPorId(id);
+        if (controleCaixa is not null)
         {
             await _controleCaixaServico.Deletar(id);
-            return Ok(tipoArquivo);
+            return Ok(controleCaixa);
         }
         return NotFound("Dados Não Encontrado");
     }

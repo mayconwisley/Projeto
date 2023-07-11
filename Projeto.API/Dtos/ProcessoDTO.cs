@@ -1,6 +1,6 @@
-﻿namespace Projeto.API.Models;
+﻿namespace Projeto.API.Dtos;
 
-public class Processo
+public class ProcessoDTO
 {
     public int Id { get; set; }
     public DateTime DataEnvio { get; set; } = new DateTime();
@@ -8,5 +8,5 @@ public class Processo
     public string Descricao { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
     public int ItemArquivoId { get; set; }
-    public ItemArquivo ItemArquivo { get; set; } = new ItemArquivo();
+    public ItemArquivoDTO ItemArquivo { get; set; } = new ItemArquivoDTO();
 }

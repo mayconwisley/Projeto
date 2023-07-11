@@ -12,5 +12,8 @@ public class MapeamentoDTO : Profile
         CreateMap<Usuario, UsuarioOutputDTO>();
         CreateMap<Acesso, AcessoDTO>().ReverseMap();
         CreateMap<ControleCaixa, ControleCaixaDTO>().ReverseMap();
+        CreateMap<Arquivo, ArquivoDTO>().ReverseMap();
+        CreateMap<Processo, ProcessoDTO>().ReverseMap();
+        CreateMap<ItemArquivo, ItemArquivoDTO>().ReverseMap();
     }
 }

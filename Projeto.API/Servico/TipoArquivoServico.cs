@@ -35,36 +35,14 @@ public class TipoArquivoServico : ITipoArquivoServico
     }
     public async Task Criar(TipoArquivoDTO tipoArquivo)
     {
-        TipoArquivoDTO tipoArquivoDTO = new()
-        {
-            Id = tipoArquivo.Id,
-            Descricao = tipoArquivo.Descricao,
-            Guardar = tipoArquivo.Guardar,
-            Tempo = tipoArquivo.Tempo,
-            SuporteItem = tipoArquivo.SuporteItem,
-            SuporteControleCaixa = tipoArquivo.SuporteControleCaixa,
-            Ativo = tipoArquivo.Ativo
-        };
-
-        var tipoArquivoEntiry = _mapper.Map<TipoArquivo>(tipoArquivoDTO);
+        var tipoArquivoEntiry = _mapper.Map<TipoArquivo>(tipoArquivo);
         await _tipoArquivoRespositorio.Criar(tipoArquivoEntiry);
-        tipoArquivoDTO.Id = tipoArquivoEntiry.Id;
+        tipoArquivo.Id = tipoArquivoEntiry.Id;
 
     }
     public async Task Atualizar(TipoArquivoDTO tipoArquivo)
     {
-        TipoArquivoDTO tipoArquivoDTO = new()
-        {
-            Id = tipoArquivo.Id,
-            Descricao = tipoArquivo.Descricao,
-            Guardar = tipoArquivo.Guardar,
-            Tempo = tipoArquivo.Tempo,
-            SuporteItem = tipoArquivo.SuporteItem,
-            SuporteControleCaixa = tipoArquivo.SuporteControleCaixa,
-            Ativo = tipoArquivo.Ativo
-        };
-
-        var tipoArquivoEntiry = _mapper.Map<TipoArquivo>(tipoArquivoDTO);
+        var tipoArquivoEntiry = _mapper.Map<TipoArquivo>(tipoArquivo);
         await _tipoArquivoRespositorio.Atualizar(tipoArquivoEntiry);
     }
     public async Task Deletar(int id)
