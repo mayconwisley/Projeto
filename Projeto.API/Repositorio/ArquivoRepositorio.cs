@@ -92,7 +92,6 @@ public class ArquivoRepositorio : IArquivoRepositorio
         }
         return new Arquivo();
     }
-
     public async Task<int> TotalDados(string pesquisa)
     {
         var totalArquivo = await _appDbContext.Arquivos
