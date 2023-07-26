@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Projeto.WEP.Models;
+using Projeto.WEP.Services;
 using System.Diagnostics;
 
 namespace Projeto.WEP.Controllers
 {
+    [SessaoLogadoService]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

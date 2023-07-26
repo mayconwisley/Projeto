@@ -1,7 +1,32 @@
+using Projeto.WEP.Services;
+using Projeto.WEP.Services.Interface;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var urlBuilder = builder.Configuration["ServicoUrl:DadosConexaoApi"];
+
+if (urlBuilder != null)
+{
+    builder.Services.AddHttpClient("DadosConexaoApi", con =>
+    {
+        con.BaseAddress = new Uri(urlBuilder);
+    });
+}
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<ISessaoService, SessaoService>();
+
+builder.Services.AddSession(s =>
+{
+    s.Cookie.HttpOnly = true;
+    s.Cookie.IsEssential = true;
+
+});
 
 var app = builder.Build();
 
@@ -19,9 +44,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.Run();
