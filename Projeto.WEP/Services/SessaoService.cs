@@ -1,7 +1,6 @@
 ﻿using Projeto.WEP.Models;
 using Projeto.WEP.Services.Interface;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Projeto.WEP.Services;
 

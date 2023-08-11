@@ -14,5 +14,6 @@ public class UsuarioInputDTO
     public AutorizacaoEnum Autorizacao { get; set; }
     [Required]
     public string Senha { get; set; } = string.Empty;
+    [Required]
     public bool Ativo { get; set; } = true;
 }

@@ -19,7 +19,7 @@ public class ItemArquivoController : ControllerBase
     [Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ItemArquivoOutputDTO>> PegarTodos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
     {
-        var itemArquivos= await _itemArquivoServico.PegarTodos(pagina, tamanho, pesquisa);
+        var itemArquivos = await _itemArquivoServico.PegarTodos(pagina, tamanho, pesquisa);
         decimal totalDados = await _itemArquivoServico.TotalDados(pesquisa);
         decimal totalPagina = (totalDados / tamanho) <= 0 ? 1 : Math.Ceiling((totalDados / tamanho));
         if (tamanho == 1)
