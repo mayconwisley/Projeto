@@ -17,14 +17,14 @@ public class SessaoService : ISessaoService
 
     public async Task<UsuarioToken> BuscarSessaoUsuario()
     {
-        string? sessaoUsuario = await Task.FromResult(_contextAccessor.HttpContext.Session.GetString("usuarioLogado"));
+        string sessaoUsuario = await Task.FromResult(_contextAccessor.HttpContext.Session.GetString("usuarioLogado"));
 
         if (string.IsNullOrEmpty(sessaoUsuario))
         {
-            return null;
+            return new UsuarioToken();
         }
 
-        UsuarioToken? usuarioToken = JsonSerializer.Deserialize<UsuarioToken>(sessaoUsuario);
+        UsuarioToken usuarioToken = JsonSerializer.Deserialize<UsuarioToken>(sessaoUsuario);
 
         return usuarioToken;
     }
