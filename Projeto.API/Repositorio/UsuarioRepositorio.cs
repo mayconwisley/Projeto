@@ -38,7 +38,6 @@ public class UsuarioRepositorio : IUsuarioRepositorio
     }
     public async Task<Usuario> PegarPorId(int id)
     {
-
         var usuario = await _appDbContext.Usuarios
             .Where(w => w.Id == id)
             .FirstOrDefaultAsync();

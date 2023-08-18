@@ -48,7 +48,6 @@ public class ControleCaixaRepositorio : IControleCaixaRepositorio
             _appDbContext.ControleCaixas.Add(controleCaixa);
             await _appDbContext.SaveChangesAsync();
             return controleCaixa;
-
         }
         return new ControleCaixa();
     }

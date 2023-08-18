@@ -25,14 +25,12 @@ public class ItemArquivoServico : IItemArquivoServico
     {
         var itemArquivo = await _itemArquivoRepositorio.PegarPorId(id);
         return _mapper.Map<ItemArquivoOutputDTO>(itemArquivo);
-
     }
     public async Task Criar(ItemArquivoInputDTO itemArquivoDTO)
     {
         var itemArquivo = _mapper.Map<ItemArquivo>(itemArquivoDTO);
         await _itemArquivoRepositorio.Criar(itemArquivo);
         itemArquivoDTO.Id = itemArquivo.Id;
-
     }
     public async Task Atualizar(ItemArquivoInputDTO itemArquivoDTO)
     {

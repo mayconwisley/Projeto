@@ -31,7 +31,6 @@ public class ArquivoServico : IArquivoServico
     {
         var arquivo = await _arquivoRepositorio.PegarPorId(id);
         return _mapper.Map<ArquivoOutputDTO>(arquivo);
-
     }
     public async Task Criar(ArquivoInputDTO arquivoDTO)
     {

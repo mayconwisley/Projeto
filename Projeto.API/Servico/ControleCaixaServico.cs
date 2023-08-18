@@ -26,15 +26,12 @@ public class ControleCaixaServico : IControleCaixaServico
     {
         var controleCaixa = await _controleCaixaRepositorio.PegarPorId(id);
         return _mapper.Map<ControleCaixaOutputDTO>(controleCaixa);
-
     }
     public async Task Criar(ControleCaixaInputDTO controleCaixaDTO)
     {
-
         var controleCaixa = _mapper.Map<ControleCaixa>(controleCaixaDTO);
         await _controleCaixaRepositorio.Criar(controleCaixa);
         controleCaixaDTO.Id = controleCaixa.Id;
-
     }
     public async Task Atualizar(ControleCaixaInputDTO controleCaixaDTO)
     {

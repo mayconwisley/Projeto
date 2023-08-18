@@ -24,7 +24,6 @@ public class TipoArquivoRepositorio : ITipoArquivoRepositorio
             .ToListAsync();
 
         return tipoArquivos;
-
     }
     public async Task<IEnumerable<TipoArquivo>> PegarTodosAtivos(int pagina, int tamanho, string pesquisa)
     {
@@ -60,7 +59,6 @@ public class TipoArquivoRepositorio : ITipoArquivoRepositorio
             _appDbContext.TipoArquivos.Add(tipoArquivo);
             await _appDbContext.SaveChangesAsync();
             return tipoArquivo;
-
         }
         return new TipoArquivo();
     }

@@ -25,7 +25,6 @@ public class ItemArquivoRepositorio : IItemArquivoRepositorio
             .ToListAsync();
 
         return itemArquivos;
-
     }
     public async Task<ItemArquivo> PegarPorId(int id)
     {

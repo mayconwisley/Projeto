@@ -30,7 +30,4 @@ public class AppDbContext : DbContext
     public DbSet<Arquivo> Arquivos { get; set; }
     public DbSet<ItemArquivo> ItemArquivos { get; set; }
     public DbSet<Processo> Processos { get; set; }
-
-
-
 }

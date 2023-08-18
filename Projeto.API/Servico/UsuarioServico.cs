@@ -32,7 +32,6 @@ public class UsuarioServico : IUsuarioServico
     {
         var usuario = await _usuarioRepositorio.PegarPorId(id);
         return _mapper.Map<UsuarioOutputDTO>(usuario);
-
     }
     public async Task<UsuarioOutputDTO> PegarPorLogin(string login)
     {
@@ -54,7 +53,6 @@ public class UsuarioServico : IUsuarioServico
         var usuario = _mapper.Map<Usuario>(usuarioDTOMap);
         await _usuarioRepositorio.Criar(usuario);
         usuarioDTO.Id = usuario.Id;
-
     }
     public async Task Atualizar(UsuarioInputDTO usuarioDTO)
     {

@@ -67,7 +67,6 @@ public class ArquivoRepositorio : IArquivoRepositorio
             _appDbContext.Arquivos.Add(arquivo);
             await _appDbContext.SaveChangesAsync();
             return arquivo;
-
         }
         return new Arquivo();
     }

@@ -31,14 +31,12 @@ public class TipoArquivoServico : ITipoArquivoServico
     {
         var tipoArquivo = await _tipoArquivoRespositorio.PegarPorId(id);
         return _mapper.Map<TipoArquivoDTO>(tipoArquivo);
-
     }
     public async Task Criar(TipoArquivoDTO tipoArquivoDTO)
     {
         var tipoArquivo = _mapper.Map<TipoArquivo>(tipoArquivoDTO);
         await _tipoArquivoRespositorio.Criar(tipoArquivo);
         tipoArquivoDTO.Id = tipoArquivo.Id;
-
     }
     public async Task Atualizar(TipoArquivoDTO tipoArquivoDTO)
     {

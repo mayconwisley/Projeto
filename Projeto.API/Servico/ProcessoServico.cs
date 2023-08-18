@@ -27,14 +27,12 @@ public class ProcessoServico : IProcessoServico
     {
         var processo = await _processoRepositorio.PegarPorId(id);
         return _mapper.Map<ProcessoOutputDTO>(processo);
-
     }
     public async Task Criar(ProcessoInputDTO processoDTO)
     {
         var processo = _mapper.Map<Processo>(processoDTO);
         await _processoRepositorio.Criar(processo);
         processoDTO.Id = processo.Id;
-
     }
     public async Task Atualizar(ProcessoInputDTO processoDTO)
     {
