@@ -1,0 +1,49 @@
+﻿@page "/NovoTipoArquivo"
+
+<PageTitle>Tipos de Arquivos</PageTitle>
+<h3>Novo Tipo de Arquivo</h3>
+
+<EditForm Model="@tipoArquivo">
+    <label>
+        Descrição
+        <InputText @bind-Value="tipoArquivo.Descricao" placeholder="Descrição" />
+    </label>
+
+    <label>
+        Guardar Por
+        <InputNumber id="guardarPor" @bind-Value="tipoArquivo.Guardar" placeholder="Guardar Por" />
+    </label>
+
+    <label>
+        Tempo
+        <InputSelect @bind-Value="tipoArquivo.Tempo">
+            <option value="">Selecione uma opção</option>
+            <option value="0">Anos</option>
+            <option value="1">Dias</option>
+            <option value="2">Meses</option>
+            <option value="3">Indeterminado</option>
+        </InputSelect>
+    </label>
+
+    <label>
+        Suporte a Item
+        <InputCheckbox @bind-Value="tipoArquivo.SuporteItem" />
+    </label>
+
+    <label>
+        Suporte a Controle de Caixa
+        <InputCheckbox @bind-Value="tipoArquivo.SuporteControleCaixa" />
+    </label>
+
+    <label>
+        Ativo
+        <InputCheckbox @bind-Value="tipoArquivo.Ativo" checked />
+    </label>
+
+    <button type="submit">Salvar</button>
+</EditForm>
+
+@code {
+    private Model.TipoArquivoDto tipoArquivo = new();
+
+}

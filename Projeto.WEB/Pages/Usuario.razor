@@ -1,0 +1,59 @@
+﻿@page "/Usuario"
+<PageTitle>Usuários</PageTitle>
+
+<h3>Lista de Usuários</h3>
+
+<a href="NovoUsuario" class="btn btn-info">Novo Usuário</a>
+
+
+@if (usuarios is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Login</th>
+                <th>Nome</th>
+                <th>Autorização</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuario in usuarios)
+            {
+                <tr>
+                    <td>@usuario.Id</td>
+                    <td>@usuario.Login</td>
+                    <td>@usuario.Nome</td>
+                    <td>@usuario.Autorizacao</td>
+                    <td>@usuario.Ativo</td>
+                    <td>
+                        <a href="#">Editar</a> |
+                        <a href="#">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Model.UsuarioOutputDto> usuarios = new()
+    {
+        new Model.UsuarioOutputDto
+        {
+            Id = 1,
+            Login = "Admin",
+            Nome = "Administrador",
+            Autorizacao = "Administrador",
+            Ativo = true
+        }
+
+    };
+}

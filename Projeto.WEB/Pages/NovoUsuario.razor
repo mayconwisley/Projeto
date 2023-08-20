@@ -1,0 +1,42 @@
+﻿@page "/NovoUsuario"
+<h3>Cadastro Novo Usuário</h3>
+
+<EditForm Model="@usuarioInputDto">
+    <label>
+        Login
+        <InputText @bind-Value="usuarioInputDto.Login" placeholder="Login" />
+    </label>
+
+    <label>
+        Nome
+        <InputText @bind-Value="usuarioInputDto.Nome" placeholder="Nome" />
+    </label>
+
+    <label>
+        Autorização
+        <InputSelect @bind-Value="usuarioInputDto.Autorizacao">
+            <option value="0">Administrador</option>
+            <option value="1">Operador</option>
+            <option value="2">Consultor</option>
+        </InputSelect>
+    </label>
+
+    <label>
+        Senha
+        <InputText type="password" @bind-Value="usuarioInputDto.Senha" />
+    </label>
+
+
+    <label>
+        Ativo
+        <InputCheckbox @bind-Value="usuarioInputDto.Ativo" />
+    </label>
+
+    <button type="submit">Salvar</button>
+</EditForm>
+
+
+@code {
+    private Model.UsuarioInputDto usuarioInputDto = new();
+
+}
