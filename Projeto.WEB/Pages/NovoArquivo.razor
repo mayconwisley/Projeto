@@ -1,6 +1,43 @@
 ﻿@page "/NovoArquivo"
 <h3>Novo Arquivo</h3>
 
-@code {
+<EditForm Model="@arquivoInputDto">
+    <label>Descrição
+        <InputText @bind-Value="arquivoInputDto.Descricao" placeholder="Descrição"/>
+    </label>
+    <label>Competência
+        <InputDate @bind-Value="arquivoInputDto.Competencia"/>
+    </label>
+    <label>Ativo
+        <InputCheckbox @bind-Value="arquivoInputDto.Ativo" />
+    </label>
+    <label> Arquitetura
+        <InputSelect @bind-Value="arquivoInputDto.Arquitetura">
+            <option value="0">Armario</option>
+            <option value="1">Prateleira</option>
+        </InputSelect>
+    </label>
+    <label>Pratelheira
+        <InputText @bind-Value="arquivoInputDto.Pratelheira" placeholder="Pratelheira"/>
+    </label>
+    <label>Pratelheira Linha
+        <InputText @bind-Value="arquivoInputDto.PratelheiraLinha" placeholder="Pratelheira Linha"/>
+    </label>
+    <label>Pratelheir Coluna
+        <InputText @bind-Value="arquivoInputDto.PratelheiraColuna" placeholder="Pratelheira Coluna"/>
+    </label>
+    <label>Armario
+        <InputText @bind-Value="arquivoInputDto.Armario" placeholder="Armario"/>
+    </label>
+    <label>Gaveta
+        <InputText @bind-Value="arquivoInputDto.Gaveta" placeholder="Gaveta"/>
+    </label>
+    <label>Numero da Caixa
+        <InputNumber @bind-Value="arquivoInputDto.NumeroCaixa"/>
+    </label>
+</EditForm>
 
+
+@code {
+    private Model.ArquivoInputDto arquivoInputDto = new();
 }

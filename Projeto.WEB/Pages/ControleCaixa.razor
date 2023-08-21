@@ -1,0 +1,45 @@
+@page "/ControleCaixa"
+<h3>Controle de Caixa</h3>
+<a href="NovoControleCaixa" class="btn btn-info">Novo Controle</a>
+
+@if (controleCaixaOutputDtos is null)
+{
+    <p><em>Carregando</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var controleCaixaOutputDto in controleCaixaOutputDtos)
+            {
+                <tr>
+                    <td>@controleCaixaOutputDto.Id</td>
+                    <td>@controleCaixaOutputDto.NumeroAtual</td>
+                    <td>@controleCaixaOutputDto.TipoArquivo?.Descricao</td>
+                    <td>
+                        <a href="#">Editar</a> |
+                        <a href="#">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Model.ControleCaixaOutputDto> controleCaixaOutputDtos = new()
+    {
+        new ControleCaixaOutputDto
+        {
+            Id = 1
+        }
+    };
+}
