@@ -12,35 +12,35 @@
 }
 else
 {
-    <div class="container overflow-auto border">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Login</th>
-                <th>Nome</th>
-                <th>Autorização</th>
-                <th>Ativo</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var usuario in usuarios)
-            {
+    <div class="tabela">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@usuario.Id</td>
-                    <td>@usuario.Login</td>
-                    <td>@usuario.Nome</td>
-                    <td>@usuario.Autorizacao</td>
-                    <td>@usuario.Ativo</td>
-                    <td>
-                        <a href="#">Editar</a> |
-                        <a href="#">Excluir</a>
-                    </td>
+                    <th>Id</th>
+                    <th>Login</th>
+                    <th>Nome</th>
+                    <th>Autorização</th>
+                    <th>Ativo</th>
+                    <th>Ações</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var usuario in usuarios)
+                {
+                    <tr>
+                        <td>@usuario.Id</td>
+                        <td>@usuario.Login</td>
+                        <td>@usuario.Nome</td>
+                        <td>@usuario.Autorizacao</td>
+                        <td>@usuario.Ativo</td>
+                        <td>
+                            <a href="#">Editar</a> |
+                            <a href="#">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 }
 
