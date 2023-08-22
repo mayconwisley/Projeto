@@ -11,74 +11,54 @@
 }
 else
 {
-    <div class="tabela">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Descricao</th>
-                <th>Guardar por</th>
-                <th>Tempo</th>
-                <th>Suporte a Item</th>
-                <th>Suporte a Caixa</th>
-                <th>Ativo</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var tipoArquivo in tipoArquivos)
-            {
-                <tr>
-                    <td>@tipoArquivo.Id</td>
-                    <td>@tipoArquivo.Descricao</td>
-                    <td>@tipoArquivo.Guardar</td>
-                    <td>@tipoArquivo.Tempo</td>
-                    <td>@tipoArquivo.SuporteItem</td>
-                    <td>@tipoArquivo.SuporteControleCaixa</td>
-                    <td>@tipoArquivo.Ativo</td>
-                    <td>
-                        <a href="#">Editar</a> |
-                        <a href="#">Excluir</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    </div>
+    <TabelaTipoArquivo TipoArquivos="tipoArquivos"></TabelaTipoArquivo>
 }
 
 
 @code {
 
 
-    private List<Model.TipoArquivoDto>? tipoArquivos = new()
+    private List<Model.TipoArquivoDto>? tipoArquivos = new List<TipoArquivoDto>();
+
+
+    protected override Task OnInitializedAsync()
     {
-        new Model.TipoArquivoDto{
-        Id = 1,
-        Descricao = "Ficha Basica",
-        Guardar = 5,
-        Tempo = 0,
-        SuporteItem = true,
-        SuporteControleCaixa = false,
-        Ativo = true
-        },
-         new Model.TipoArquivoDto{
-        Id = 1,
-        Descricao = "Ficha Basica",
-        Guardar = 5,
-        Tempo = 0,
-        SuporteItem = true,
-        SuporteControleCaixa = false,
-        Ativo = true
-         },
-         new Model.TipoArquivoDto{
-        Id = 1,
-        Descricao = "Ficha Basica",
-        Guardar = 5,
-        Tempo = 0,
-        SuporteItem = true,
-        SuporteControleCaixa = false,
-        Ativo = true
+        tipoArquivos = new()
+        {
+             new Model.TipoArquivoDto
+             {
+                Id = 1,
+                Descricao = "Ficha Basica",
+                Guardar = 5,
+                Tempo = 0,
+                SuporteItem = true,
+                SuporteControleCaixa = false,
+                Ativo = true
+            },
+            new Model.TipoArquivoDto
+            {
+                Id = 1,
+                Descricao = "Ficha Basica",
+                Guardar = 5,
+                Tempo = 0,
+                SuporteItem = true,
+                SuporteControleCaixa = false,
+                Ativo = true
+            },
+            new Model.TipoArquivoDto
+            {
+                Id = 1,
+                Descricao = "Ficha Basica",
+                Guardar = 5,
+                Tempo = 0,
+                SuporteItem = true,
+                SuporteControleCaixa = false,
+                Ativo = true
+            }
+        };
+
+        return base.OnInitializedAsync();
+
+
     }
-    };
 }
