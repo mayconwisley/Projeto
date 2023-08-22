@@ -5,7 +5,6 @@
 
 <a href="NovoUsuario" class="btn btn-info">Novo Usuário</a>
 
-
 @if (usuarios is null)
 {
     <p><em>Loading...</em></p>
@@ -15,10 +14,8 @@ else
     <TabelaUsuario Usuarios="usuarios"></TabelaUsuario>
 }
 
-
 @code {
     private List<Model.UsuarioOutputDto> usuarios = new();
-
     protected override Task OnInitializedAsync()
     {
         usuarios = new()

@@ -8,42 +8,25 @@
 }
 else
 {
-<div class="tabela">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Numero</th>
-                <th>Descrição</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var controleCaixaOutputDto in controleCaixaOutputDtos)
-            {
-                <tr>
-                    <td>@controleCaixaOutputDto.Id</td>
-                    <td>@controleCaixaOutputDto.NumeroAtual</td>
-                    <td>@controleCaixaOutputDto.TipoArquivo?.Descricao</td>
-                    <td>
-                        <a href="#">Editar</a> |
-                        <a href="#">Excluir</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
-    
+    <TabelaControleCaixa ControleCaixaOutputDtos="controleCaixaOutputDtos"></TabelaControleCaixa>
 }
 
 @code {
-    private List<Model.ControleCaixaOutputDto> controleCaixaOutputDtos = new()
+    private List<ControleCaixaOutputDto> controleCaixaOutputDtos = new();
+    protected override Task OnInitializedAsync()
     {
-        new ControleCaixaOutputDto
+       controleCaixaOutputDtos = new()
         {
-            Id = 1
-        }
-    };
+            new ControleCaixaOutputDto()
+            {
+                Id = 1,
+                NumeroAtual = 1,
+                TipoArquivo = new TipoArquivoDto(){
+                    Descricao = "Teste"
+                }
+            }
+        };
+        
+        return base.OnInitializedAsync();
+    }
 }

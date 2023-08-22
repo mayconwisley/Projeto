@@ -14,13 +14,8 @@ else
     <TabelaTipoArquivo TipoArquivos="tipoArquivos"></TabelaTipoArquivo>
 }
 
-
 @code {
-
-
     private List<Model.TipoArquivoDto>? tipoArquivos = new List<TipoArquivoDto>();
-
-
     protected override Task OnInitializedAsync()
     {
         tipoArquivos = new()
@@ -37,7 +32,7 @@ else
             },
             new Model.TipoArquivoDto
             {
-                Id = 1,
+                Id = 2,
                 Descricao = "Ficha Basica",
                 Guardar = 5,
                 Tempo = 0,
@@ -47,7 +42,7 @@ else
             },
             new Model.TipoArquivoDto
             {
-                Id = 1,
+                Id = 3,
                 Descricao = "Ficha Basica",
                 Guardar = 5,
                 Tempo = 0,
@@ -58,7 +53,5 @@ else
         };
 
         return base.OnInitializedAsync();
-
-
     }
 }

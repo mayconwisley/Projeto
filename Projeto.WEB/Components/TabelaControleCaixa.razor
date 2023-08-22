@@ -1,0 +1,34 @@
+<div class="tabela">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ControleCaixaOutputDtos is not null)
+            {
+                @foreach (var controleCaixaOutputDto in ControleCaixaOutputDtos)
+                {
+                    <tr>
+                        <td>@controleCaixaOutputDto.Id</td>
+                        <td>@controleCaixaOutputDto.NumeroAtual</td>
+                        <td>@controleCaixaOutputDto.TipoArquivo?.Descricao</td>
+                        <td>
+                            <a href="#">Editar</a> |
+                            <a href="#">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter]
+    public List<ControleCaixaOutputDto>? ControleCaixaOutputDtos { get; set; }
+}

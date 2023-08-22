@@ -13,21 +13,24 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var tipoArquivo in TipoArquivos)
+            @if(TipoArquivos is not null)
             {
-                <tr>
-                    <td>@tipoArquivo.Id</td>
-                    <td>@tipoArquivo.Descricao</td>
-                    <td>@tipoArquivo.Guardar</td>
-                    <td>@tipoArquivo.Tempo</td>
-                    <td>@tipoArquivo.SuporteItem</td>
-                    <td>@tipoArquivo.SuporteControleCaixa</td>
-                    <td>@tipoArquivo.Ativo</td>
-                    <td>
-                        <a href="#">Editar</a> |
-                        <a href="#">Excluir</a>
-                    </td>
-                </tr>
+                @foreach (var tipoArquivo in TipoArquivos)
+                {
+                    <tr>
+                        <td>@tipoArquivo.Id</td>
+                        <td>@tipoArquivo.Descricao</td>
+                        <td>@tipoArquivo.Guardar</td>
+                        <td>@tipoArquivo.Tempo</td>
+                        <td>@tipoArquivo.SuporteItem</td>
+                        <td>@tipoArquivo.SuporteControleCaixa</td>
+                        <td>@tipoArquivo.Ativo</td>
+                        <td>
+                            <a href="#">Editar</a> |
+                            <a href="#">Excluir</a>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
@@ -35,5 +38,5 @@
 
 @code {
     [Parameter]
-    public List<Model.TipoArquivoDto>? TipoArquivos { get; set; }
+    public List<TipoArquivoDto>? TipoArquivos { get; set; }
 }
