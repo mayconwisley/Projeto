@@ -13,9 +13,9 @@
             </tr>
         </thead>
         <tbody>
-            @if(TipoArquivos is not null)
+            @if(TipoArquivosView?.Dados is not null)
             {
-                @foreach (var tipoArquivo in TipoArquivos)
+                @foreach (var tipoArquivo in TipoArquivosView.Dados)
                 {
                     <tr>
                         <td>@tipoArquivo.Id</td>
@@ -38,5 +38,5 @@
 
 @code {
     [Parameter]
-    public List<TipoArquivoDto>? TipoArquivos { get; set; }
+    public TipoArquivoView? TipoArquivosView { get; set; }
 }

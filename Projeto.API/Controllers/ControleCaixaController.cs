@@ -17,7 +17,7 @@ public class ControleCaixaController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = "Administrador, Operador, Consultor")]
+    //[Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ControleCaixaOutputDTO>> PegarTodos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
     {
         var controleCaixaDTO = await _controleCaixaServico.PegarTodos(pagina, tamanho, pesquisa);
@@ -38,7 +38,7 @@ public class ControleCaixaController : ControllerBase
         });
     }
     [HttpGet("{id:int}", Name = "PegarControleCaixa")]
-    [Authorize(Roles = "Administrador, Operador, Consultor")]
+    //[Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ControleCaixaOutputDTO>> PegarPorId(int id)
     {
         var controleCaixaDTO = await _controleCaixaServico.PegarPorId(id);
@@ -49,7 +49,7 @@ public class ControleCaixaController : ControllerBase
         return NotFound("Dados não encontrado");
     }
     [HttpPost]
-    [Authorize(Roles = "Administrador, Operador")]
+    //[Authorize(Roles = "Administrador, Operador")]
     public async Task<ActionResult<ControleCaixaInputDTO>> Post([FromBody] ControleCaixaInputDTO controleCaixaDTO)
     {
         if (controleCaixaDTO is not null)
@@ -60,7 +60,7 @@ public class ControleCaixaController : ControllerBase
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
-    [Authorize(Roles = "Administrador, Operador")]
+    //[Authorize(Roles = "Administrador, Operador")]
     public async Task<ActionResult<ControleCaixaInputDTO>> Put(int id, [FromBody] ControleCaixaInputDTO controleCaixaDTO)
     {
         if (id != controleCaixaDTO.Id)
@@ -76,7 +76,7 @@ public class ControleCaixaController : ControllerBase
         return BadRequest("Dados Incorretos");
     }
     [HttpDelete("{id:int}")]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public async Task<ActionResult<ControleCaixaOutputDTO>> Delete(int id)
     {
         var controleCaixaDTO = await _controleCaixaServico.PegarPorId(id);

@@ -1,57 +1,28 @@
 ﻿@page "/TipoArquivo"
+@inject ITipoArquivoServices tipoArquivoServices;
+
 
 <PageTitle>Tipos de Arquivos</PageTitle>
 <h3>Lista Tipo Arquivo</h3>
 <a href="NovoTipoArquivo" class="btn btn-info">Novo Tipo</a>
 
 
-@if (tipoArquivos is null)
+@if (tipoArquivoView is null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <TabelaTipoArquivo TipoArquivos="tipoArquivos"></TabelaTipoArquivo>
+    <TabelaTipoArquivo TipoArquivosView="tipoArquivoView"></TabelaTipoArquivo>
 }
 
 @code {
-    private List<Model.TipoArquivoDto>? tipoArquivos = new List<TipoArquivoDto>();
-    protected override Task OnInitializedAsync()
+   
+    public TipoArquivoView? tipoArquivoView = new();
+    
+    protected override async Task OnInitializedAsync()
     {
-        tipoArquivos = new()
-        {
-             new Model.TipoArquivoDto
-             {
-                Id = 1,
-                Descricao = "Ficha Basica",
-                Guardar = 5,
-                Tempo = 0,
-                SuporteItem = true,
-                SuporteControleCaixa = false,
-                Ativo = true
-            },
-            new Model.TipoArquivoDto
-            {
-                Id = 2,
-                Descricao = "Ficha Basica",
-                Guardar = 5,
-                Tempo = 0,
-                SuporteItem = true,
-                SuporteControleCaixa = false,
-                Ativo = true
-            },
-            new Model.TipoArquivoDto
-            {
-                Id = 3,
-                Descricao = "Ficha Basica",
-                Guardar = 5,
-                Tempo = 0,
-                SuporteItem = true,
-                SuporteControleCaixa = false,
-                Ativo = true
-            }
-        };
+        tipoArquivoView = await tipoArquivoServices.PegarTodos();
 
-        return base.OnInitializedAsync();
     }
 }

@@ -16,7 +16,7 @@ public class ArquivoController : ControllerBase
         _arquivoServico = arquivoServico;
     }
     [HttpGet("Ativos")]
-    [Authorize(Roles = "Administrador, Operador, Consultor")]
+    //[Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ArquivoOutputDTO>> PegarTodosAtivos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
     {
         var arquivoDTO = await _arquivoServico.PegarTodosAtivos(pagina, tamanho, pesquisa);
@@ -37,7 +37,7 @@ public class ArquivoController : ControllerBase
         });
     }
     [HttpGet]
-    [Authorize(Roles = "Administrador, Operador, Consultor")]
+    //[Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ArquivoOutputDTO>> PegarTodos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
     {
         var arquivoDTO = await _arquivoServico.PegarTodos(pagina, tamanho, pesquisa);
@@ -58,7 +58,7 @@ public class ArquivoController : ControllerBase
         });
     }
     [HttpGet("{id:int}", Name = "PegarArquivo")]
-    [Authorize(Roles = "Administrador, Operador, Consultor")]
+    //[Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ArquivoOutputDTO>> PegarPorId(int id)
     {
         var arquivoDTO = await _arquivoServico.PegarPorId(id);
@@ -69,7 +69,7 @@ public class ArquivoController : ControllerBase
         return NotFound("Dados não encontrado");
     }
     [HttpPost]
-    [Authorize(Roles = "Administrador, Operador")]
+    //[Authorize(Roles = "Administrador, Operador")]
     public async Task<ActionResult<ArquivoInputDTO>> Post([FromBody] ArquivoInputDTO arquivoDTO)
     {
         if (arquivoDTO is not null)
@@ -80,7 +80,7 @@ public class ArquivoController : ControllerBase
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
-    [Authorize(Roles = "Administrador, Operador")]
+    //[Authorize(Roles = "Administrador, Operador")]
     public async Task<ActionResult<ArquivoInputDTO>> Put(int id, [FromBody] ArquivoInputDTO arquivoDTO)
     {
         if (id != arquivoDTO.Id)
@@ -96,7 +96,7 @@ public class ArquivoController : ControllerBase
         return BadRequest("Dados Incorretos");
     }
     [HttpDelete("{id:int}")]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public async Task<ActionResult<ArquivoOutputDTO>> Delete(int id)
     {
         var arquivoDTO = await _arquivoServico.PegarPorId(id);

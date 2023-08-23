@@ -16,7 +16,7 @@ public class ItemArquivoController : ControllerBase
         _itemArquivoServico = itemArquivoServico;
     }
     [HttpGet]
-    [Authorize(Roles = "Administrador, Operador, Consultor")]
+    //[Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ItemArquivoOutputDTO>> PegarTodos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
     {
         var itemArquivos = await _itemArquivoServico.PegarTodos(pagina, tamanho, pesquisa);
@@ -37,7 +37,7 @@ public class ItemArquivoController : ControllerBase
         });
     }
     [HttpGet("{id:int}", Name = "PegarItemArquivo")]
-    [Authorize(Roles = "Administrador, Operador, Consultor")]
+    //[Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ItemArquivoOutputDTO>> PegarPorId(int id)
     {
         var itemArquivoDTO = await _itemArquivoServico.PegarPorId(id);
@@ -48,7 +48,7 @@ public class ItemArquivoController : ControllerBase
         return NotFound("Dados não encontrado");
     }
     [HttpPost]
-    [Authorize(Roles = "Administrador, Operador")]
+    //[Authorize(Roles = "Administrador, Operador")]
     public async Task<ActionResult<ItemArquivoInputDTO>> Post([FromBody] ItemArquivoInputDTO itemArquivoDTO)
     {
         if (itemArquivoDTO is not null)
@@ -59,7 +59,7 @@ public class ItemArquivoController : ControllerBase
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
-    [Authorize(Roles = "Administrador, Operador")]
+    //[Authorize(Roles = "Administrador, Operador")]
     public async Task<ActionResult<ItemArquivoInputDTO>> Put(int id, [FromBody] ItemArquivoInputDTO itemArquivoDTO)
     {
         if (id != itemArquivoDTO.Id)
@@ -75,7 +75,7 @@ public class ItemArquivoController : ControllerBase
         return BadRequest("Dados Incorretos");
     }
     [HttpDelete("{id:int}")]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public async Task<ActionResult<ItemArquivoOutputDTO>> Delete(int id)
     {
         var itemArquivoDTO = await _itemArquivoServico.PegarPorId(id);

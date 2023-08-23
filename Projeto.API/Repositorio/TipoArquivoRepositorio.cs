@@ -83,7 +83,6 @@ public class TipoArquivoRepositorio : ITipoArquivoRepositorio
         }
         return new TipoArquivo();
     }
-
     public async Task<int> TotalDados(string pesquisa)
     {
         var totalTipoArquivo = await _appDbContext.TipoArquivos

@@ -16,7 +16,7 @@ public class UsuarioController : ControllerBase
         _usuarioServico = usuarioServico;
     }
     [HttpGet("Ativos")]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public async Task<ActionResult<UsuarioOutputDTO>> PegarTodosAtivos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
     {
         var usuarioDTO = await _usuarioServico.PegarTodosAtivos(pagina, tamanho, pesquisa);
@@ -37,7 +37,7 @@ public class UsuarioController : ControllerBase
         });
     }
     [HttpGet]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public async Task<ActionResult<UsuarioOutputDTO>> PegarTodos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
     {
         var usuarioDTO = await _usuarioServico.PegarTodos(pagina, tamanho, pesquisa);
@@ -58,7 +58,7 @@ public class UsuarioController : ControllerBase
         });
     }
     [HttpGet("{id:int}", Name = "PegarUsuario")]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public async Task<ActionResult<UsuarioOutputDTO>> PegarPorId(int id)
     {
         var usuarioDTO = await _usuarioServico.PegarPorId(id);
@@ -69,7 +69,7 @@ public class UsuarioController : ControllerBase
         return NotFound("Dados não encontrado");
     }
     [HttpPost]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public async Task<ActionResult<UsuarioInputDTO>> Post([FromBody] UsuarioInputDTO usuarioDTO)
     {
         if (usuarioDTO is not null)
@@ -80,7 +80,7 @@ public class UsuarioController : ControllerBase
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public async Task<ActionResult<UsuarioInputDTO>> Put(int id, [FromBody] UsuarioInputDTO usuarioDTO)
     {
         if (id != usuarioDTO.Id)
@@ -96,7 +96,7 @@ public class UsuarioController : ControllerBase
         return BadRequest("Dados Incorretos");
     }
     [HttpDelete("{id:int}")]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public async Task<ActionResult<UsuarioOutputDTO>> Delete(int id)
     {
         var usuarioDTO = await _usuarioServico.PegarPorId(id);

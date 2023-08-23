@@ -16,7 +16,7 @@ public class ProcessoController : ControllerBase
         _processoServico = processoServico;
     }
     [HttpGet]
-    [Authorize(Roles = "Administrador, Operador, Consultor")]
+    //[Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ProcessoOutputDTO>> PegarTodos([FromQuery] int pagina = 1, [FromQuery] int tamanho = 25, [FromQuery] string pesquisa = "")
     {
         var processos = await _processoServico.PegarTodos(pagina, tamanho, pesquisa);
@@ -37,7 +37,7 @@ public class ProcessoController : ControllerBase
         });
     }
     [HttpGet("{id:int}", Name = "PegarProcesso")]
-    [Authorize(Roles = "Administrador, Operador, Consultor")]
+    //[Authorize(Roles = "Administrador, Operador, Consultor")]
     public async Task<ActionResult<ProcessoOutputDTO>> PegarPorId(int id)
     {
         var processoDTO = await _processoServico.PegarPorId(id);
@@ -48,7 +48,7 @@ public class ProcessoController : ControllerBase
         return NotFound("Dados não encontrado");
     }
     [HttpPost]
-    [Authorize(Roles = "Administrador, Operador")]
+    //[Authorize(Roles = "Administrador, Operador")]
     public async Task<ActionResult<ProcessoInputDTO>> Post([FromBody] ProcessoInputDTO processoDTO)
     {
         if (processoDTO is not null)
@@ -59,7 +59,7 @@ public class ProcessoController : ControllerBase
         return BadRequest("Dados Incorretos");
     }
     [HttpPut("{id:int}")]
-    [Authorize(Roles = "Administrador, Operador")]
+    //[Authorize(Roles = "Administrador, Operador")]
     public async Task<ActionResult<ProcessoInputDTO>> Put(int id, [FromBody] ProcessoInputDTO processoDTO)
     {
         if (id != processoDTO.Id)
@@ -75,7 +75,7 @@ public class ProcessoController : ControllerBase
         return BadRequest("Dados Incorretos");
     }
     [HttpDelete("{id:int}")]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public async Task<ActionResult<ProcessoOutputDTO>> Delete(int id)
     {
         var processoDTO = await _processoServico.PegarPorId(id);
