@@ -1,11 +1,9 @@
 ﻿@page "/TipoArquivo"
 @inject ITipoArquivoServices tipoArquivoServices;
 
-
 <PageTitle>Tipos de Arquivos</PageTitle>
 <h3>Lista Tipo Arquivo</h3>
 <a href="NovoTipoArquivo" class="btn btn-info">Novo Tipo</a>
-
 
 @if (tipoArquivoView is null)
 {
@@ -19,10 +17,8 @@ else
 @code {
    
     public TipoArquivoView? tipoArquivoView = new();
-    
     protected override async Task OnInitializedAsync()
     {
         tipoArquivoView = await tipoArquivoServices.PegarTodos();
-
     }
 }

@@ -106,7 +106,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(politica => politica.WithOrigins("http://localhost:7093", "https://localhost:7093")
+app.UseCors(politica => politica.WithOrigins("http://localhost:7093", "https://localhost:7093","http://localhost:5013")
     .AllowAnyMethod()
     .AllowAnyHeader()
     .WithHeaders(HeaderNames.ContentType)

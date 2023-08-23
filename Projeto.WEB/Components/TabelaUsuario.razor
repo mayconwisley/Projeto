@@ -1,4 +1,4 @@
-﻿<div class="tabela">
+﻿<div class="border">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -11,9 +11,9 @@
             </tr>
         </thead>
         <tbody>
-            @if(Usuarios is not null)
+            @if(UsuarioView?.Dados is not null)
             {
-                @foreach (var usuario in Usuarios)
+                @foreach (var usuario in UsuarioView.Dados)
                 {
                     <tr>
                         <td>@usuario.Id</td>
@@ -35,5 +35,5 @@
 
 @code {
     [Parameter]
-    public List<UsuarioOutputDto>? Usuarios { get; set; }
+    public UsuarioOutputView? UsuarioView { get; set; }
 }

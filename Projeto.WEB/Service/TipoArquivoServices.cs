@@ -8,15 +8,15 @@ namespace Projeto.WEB.Service;
 
 public class TipoArquivoServices : ITipoArquivoServices
 {
-    private readonly HttpClient _httpClient;
+    private readonly IHttpClientFactory _httpClientFactory;
     private readonly JsonSerializerOptions _serializerOptions;
     private const string? apiEndPoint = "api/TipoArquivo";
     private readonly TipoArquivoDto tipoArquivoDto = new();
     private readonly TipoArquivoView tipoArquivoView = new();
 
-    public TipoArquivoServices(HttpClient httpClient)
+    public TipoArquivoServices(IHttpClientFactory httpClientFactory)
     {
-        _httpClient = httpClient;
+        _httpClientFactory = httpClientFactory;
         _serializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
     }
 
@@ -24,7 +24,9 @@ public class TipoArquivoServices : ITipoArquivoServices
     {
         try
         {
-            var tipoArquivoView = await _httpClient.GetFromJsonAsync<TipoArquivoView>(apiEndPoint + $"?pagina={pagina}&tamanho={tamanho}&pesquisa={pesquisa}");
+            var httpClient = _httpClientFactory.CreateClient("ConexaoApi");
+
+            var tipoArquivoView = await httpClient.GetFromJsonAsync<TipoArquivoView>(apiEndPoint + $"?pagina={pagina}&tamanho={tamanho}&pesquisa={pesquisa}");
 
             if (tipoArquivoView is not null)
             {

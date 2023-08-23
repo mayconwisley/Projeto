@@ -1,4 +1,4 @@
-﻿<div class="tabela">
+﻿<div class="border">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -22,9 +22,16 @@
                         <td>@tipoArquivo.Descricao</td>
                         <td>@tipoArquivo.Guardar</td>
                         <td>@tipoArquivo.Tempo</td>
-                        <td>@tipoArquivo.SuporteItem</td>
-                        <td>@tipoArquivo.SuporteControleCaixa</td>
-                        <td>@tipoArquivo.Ativo</td>
+                        <td class="text-center"> 
+                            <InputCheckbox @bind-Value="tipoArquivo.SuporteItem" disabled />
+                        </td>  
+                            
+                        <td class="text-center">
+                            <InputCheckbox @bind-Value="tipoArquivo.SuporteControleCaixa" disabled/>
+                        </td>
+                        <td class="text-center">
+                            <InputCheckbox @bind-Value="tipoArquivo.Ativo" disabled />
+                        </td>
                         <td>
                             <a href="#">Editar</a> |
                             <a href="#">Excluir</a>

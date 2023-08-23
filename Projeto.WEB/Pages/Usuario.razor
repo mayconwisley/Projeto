@@ -1,34 +1,24 @@
 ﻿@page "/Usuario"
+@inject IUsuarioServices usuarioServices
 <PageTitle>Usuários</PageTitle>
 
 <h3>Lista de Usuários</h3>
 
 <a href="NovoUsuario" class="btn btn-info">Novo Usuário</a>
 
-@if (usuarios is null)
+@if (usuarioOutpurView is null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <TabelaUsuario Usuarios="usuarios"></TabelaUsuario>
+    <TabelaUsuario UsuarioView="usuarioOutpurView"></TabelaUsuario>
 }
 
 @code {
-    private List<Model.UsuarioOutputDto> usuarios = new();
-    protected override Task OnInitializedAsync()
+    private UsuarioOutputView? usuarioOutpurView = new();
+    protected override async Task OnInitializedAsync()
     {
-        usuarios = new()
-        {
-             new Model.UsuarioOutputDto
-            {
-                Id = 1,
-                Login = "Admin",
-                Nome = "Administrador",
-                Autorizacao = "Administrador",
-                Ativo = true
-            }
-        };
-        return base.OnInitializedAsync();
+        usuarioOutpurView = await usuarioServices.PegarTodos();
     }
 }
