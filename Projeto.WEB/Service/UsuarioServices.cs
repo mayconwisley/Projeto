@@ -23,7 +23,7 @@ public class UsuarioServices : IUsuarioServices
 
     public async Task<UsuarioOutputView> PegarTodos(int pagina = 1, int tamanho = 25, string pesquisa = "")
     {
-         try
+        try
         {
             var httpClient = _httpClientFactory.CreateClient("ConexaoApi");
 

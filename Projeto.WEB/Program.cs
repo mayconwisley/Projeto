@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Projeto.WEB;
@@ -9,14 +10,18 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-//var baseUrlApi = "https://localhost:7006";
-var baseUrlApi = "http://localhost:5159";
-builder.Services.AddHttpClient("ConexaoApi", con =>{
+var baseUrlApi = "https://localhost:7006";
+//var baseUrlApi = "http://localhost:5159";
+builder.Services.AddHttpClient("ConexaoApi", con =>
+{
     con.BaseAddress = new Uri(baseUrlApi);
 });
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseUrlApi) });
 builder.Services.AddScoped<ITipoArquivoServices, TipoArquivoServices>();
 builder.Services.AddScoped<IUsuarioServices, UsuarioServices>();
+
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddScoped<ITIpoAquivoLocalStorageServices, TIpoAquivoLocalStorageService>();
 
 await builder.Build().RunAsync();

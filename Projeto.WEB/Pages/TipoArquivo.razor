@@ -1,5 +1,6 @@
 ﻿@page "/TipoArquivo"
 @inject ITipoArquivoServices tipoArquivoServices;
+@inject ITIpoAquivoLocalStorageServices tipoArquivoLocalStorageService;
 
 <PageTitle>Tipos de Arquivos</PageTitle>
 <h3>Lista Tipo Arquivo</h3>
@@ -15,10 +16,19 @@ else
 }
 
 @code {
-   
+
     public TipoArquivoView? tipoArquivoView = new();
     protected override async Task OnInitializedAsync()
     {
-        tipoArquivoView = await tipoArquivoServices.PegarTodos();
+        try
+        {
+           
+            tipoArquivoView = await tipoArquivoLocalStorageService.PegarTiposArquivosStorage();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
+
 }
