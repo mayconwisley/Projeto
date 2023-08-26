@@ -5,7 +5,7 @@
         @{
             int pagina = Pagina;
             int totalPaginas = TotalPagina;
-            int linksPorPagina = 5; // número de links exibidos por página
+            int linksPorPagina = 10; // número de links exibidos por página
             int paginaInicial = Math.Max(pagina - (linksPorPagina / 2), 1);
             int paginaFinal = Math.Min(paginaInicial + linksPorPagina - 1, totalPaginas);
         }

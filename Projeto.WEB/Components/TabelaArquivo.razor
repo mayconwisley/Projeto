@@ -9,18 +9,18 @@
                 <th>Data Vencimento</th>
                 <th>Ativo</th>
                 <th>Arquitetura</th>
-                <th>Pratelheira</th>
+              @*   <th>Pratelheira</th>
                 <th>Pratelheira Linha</th>
                 <th>Pratelheira Coluna</th>
                 <th>Armario</th>
-                <th>Gaveta</th>
+                <th>Gaveta</th> *@
                 <th>Data Descarte</th>
                 <th>Numero Caixa</th>
-                <th>Data Ultima Atualizacao</th>
+              @*   <th>Data Ultima Atualizacao</th>
                 <th>Primeiro Usuario Cadastro</th>
-                <th>Ultimo Usuario Atualizar</th>
+                <th>Ultimo Usuario Atualizar</th> *@
                 <th>Tipo Arquivo</th>
-                <th>Usuario</th>
+               @*  <th>Usuario</th> *@
                 <th>Ações</th>
             </tr>
         </thead>
@@ -41,18 +41,18 @@
                             <td>@arquivoOutputDto.DataVencimento.ToShortDateString()</td>
                             <td>@arquivoOutputDto.Ativo</td>
                             <td>@arquivoOutputDto.Arquitetura</td>
-                            <td>@arquivoOutputDto.Pratelheira</td>
+                           @*  <td>@arquivoOutputDto.Pratelheira</td>
                             <td>@arquivoOutputDto.PratelheiraLinha</td>
                             <td>@arquivoOutputDto.PratelheiraColuna</td>
                             <td>@arquivoOutputDto.Armario</td>
-                            <td>@arquivoOutputDto.Gaveta</td>
+                            <td>@arquivoOutputDto.Gaveta</td> *@
                             <td>@arquivoOutputDto.DataDescarte.ToShortDateString()</td>
                             <td>@arquivoOutputDto.NumeroCaixa</td>
-                            <td>@arquivoOutputDto.DataUltimaAtualizacao.ToShortDateString()</td>
+                           @*  <td>@arquivoOutputDto.DataUltimaAtualizacao.ToShortDateString()</td>
                             <td>@arquivoOutputDto.PrimeiroUsuarioCadastro</td>
-                            <td>@arquivoOutputDto.UltimoUsuarioAtualizar</td>
+                            <td>@arquivoOutputDto.UltimoUsuarioAtualizar</td> *@
                             <td>@arquivoOutputDto.TipoArquivo?.Descricao</td>
-                            <td>@arquivoOutputDto.Usuario?.Login</td>
+                           @*  <td>@arquivoOutputDto.Usuario?.Login</td> *@
                             <td>
                                 <a href="#">Editar</a> |
                                 <a href="#">Excluir</a>
