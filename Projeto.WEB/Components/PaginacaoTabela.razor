@@ -1,0 +1,43 @@
+﻿<p>Total de Dados Cadastrado: @TotalDados @(TotalDados == 1 ? "Item" : "Itens")</p>
+
+<nav aria-label="...">
+    <ul class="pagination">
+        @{
+            int pagina = Pagina;
+            int totalPaginas = TotalPagina;
+            int linksPorPagina = 5; // número de links exibidos por página
+            int paginaInicial = Math.Max(pagina - (linksPorPagina / 2), 1);
+            int paginaFinal = Math.Min(paginaInicial + linksPorPagina - 1, totalPaginas);
+        }
+        <li class="page-item @(pagina == 1 ? "disabled" : "")">
+            <button class="page-link" @onclick="@(p => MudarPagina(pagina - 1))" tabindex="-1">Anterior</button>
+        </li>
+        @for (int i = paginaInicial; i <= paginaFinal; i++)
+        {
+            int paginaAtual = i;
+
+            <li class="page-item @(i == pagina ? "active" : "")">
+                <button class="page-link" @onclick="@(p => MudarPagina(paginaAtual))">@i<span class="sr-only"></span></button>
+            </li>
+        }
+        <li class="page-item @(pagina == totalPaginas ? "disabled" : "")">
+            <button class="page-link" @onclick="@(p => MudarPagina(pagina + 1))">Próximo</button>
+        </li>
+    </ul>
+</nav>
+
+@code {
+    [Parameter]
+    public int TotalDados { get; set; }
+    [Parameter]
+    public int Pagina { get; set; }
+    [Parameter]
+    public int TotalPagina { get; set; }
+    [Parameter]
+    public EventCallback<int> PaginaAtual { get; set; }
+
+    private async Task MudarPagina(int paginaAtual)
+    {
+       await PaginaAtual.InvokeAsync(paginaAtual);
+    }
+}

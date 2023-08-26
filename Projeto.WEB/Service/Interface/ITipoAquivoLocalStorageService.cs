@@ -4,6 +4,6 @@ namespace Projeto.WEB.Service.Interface;
 
 public interface ITipoAquivoLocalStorageService
 {
-    Task<TipoArquivoView> PegarTiposArquivosStorage();
+    Task<TipoArquivoView> PegarTiposArquivosStorage(int pagina);
     Task RemoverColecao();
 }

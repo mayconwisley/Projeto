@@ -10,6 +10,11 @@
 else
 {
     <TabelaControleCaixa ControleCaixaOutputView="controleCaixaOutputView"></TabelaControleCaixa>
+
+    <PaginacaoTabela PaginaAtual="ReceberPagina"
+                     TotalDados="controleCaixaOutputView.TotalDados"
+                     Pagina="controleCaixaOutputView.Pagina"
+                     TotalPagina="controleCaixaOutputView.TotalPagina" />
 }
 
 @code {
@@ -27,5 +32,9 @@ else
         {
             throw;
         }
+    }
+    private async Task ReceberPagina(int paginaAtual)
+    {
+        controleCaixaOutputView = await controleCaixaService.PegarTodos(paginaAtual);
     }
 }

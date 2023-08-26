@@ -12,6 +12,10 @@
 else
 {
     <TabelaTipoArquivo TipoArquivosView="tipoArquivoView"></TabelaTipoArquivo>
+    <PaginacaoTabela PaginaAtual="ReceberPagina"
+                     TotalDados="tipoArquivoView.TotalDados"
+                     Pagina="tipoArquivoView.Pagina"
+                     TotalPagina="tipoArquivoView.TotalPagina" />
 }
 
 @code {
@@ -22,16 +26,16 @@ else
     {
         try
         {
-            tipoArquivoView = await tipoArquivoLocalStorageService.PegarTiposArquivosStorage();
+            tipoArquivoView = await tipoArquivoLocalStorageService.PegarTiposArquivosStorage(1);
         }
         catch (Exception)
         {
             throw;
         }
     }
-    private async Task LimparLocalStorege()
+    
+    private async Task ReceberPagina(int paginaAtual)
     {
-        await tipoArquivoLocalStorageService.RemoverColecao();
+        tipoArquivoView = await tipoArquivoLocalStorageService.PegarTiposArquivosStorage(paginaAtual);
     }
-
 }

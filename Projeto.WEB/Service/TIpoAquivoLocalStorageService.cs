@@ -17,26 +17,29 @@ namespace Projeto.WEB.Service
             _tipoArquivoService = tipoArquivoService;
         }
 
-        public async Task<TipoArquivoView> PegarTiposArquivosStorage()
+        public async Task<TipoArquivoView> PegarTiposArquivosStorage(int pagina)
         {
-            return await _localStorageService.GetItemAsync<TipoArquivoView>(key) ?? await AdicionarColecao();
+            return await _localStorageService.GetItemAsync<TipoArquivoView>($"{key}-pagina:{pagina}") ?? await AdicionarColecao(pagina);
         }
 
         public async Task RemoverColecao()
         {
-            await _localStorageService.RemoveItemAsync(key);
+            await _localStorageService.ClearAsync();
+            //await _localStorageService.RemoveItemAsync($"{key}-pagina:{pagina}");
         }
 
-        private async Task<TipoArquivoView> AdicionarColecao()
+        private async Task<TipoArquivoView> AdicionarColecao(int pagina)
         {
-            var tipoArquivoColecao = await _tipoArquivoService.PegarTodos();
-           
+            var tipoArquivoColecao = await _tipoArquivoService.PegarTodos(pagina);
+
 
             if (tipoArquivoColecao is not null)
             {
-                await _localStorageService.SetItemAsync(key, tipoArquivoColecao);
+                await _localStorageService.SetItemAsync($"{key}-pagina:{pagina}", tipoArquivoColecao);
+                return tipoArquivoColecao;
             }
-            return tipoArquivoColecao;
+            return new TipoArquivoView();
+
         }
     }
 }

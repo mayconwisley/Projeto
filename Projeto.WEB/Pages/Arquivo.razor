@@ -8,14 +8,25 @@
 }
 else
 {
-    <TabelaArquivo ArquivoOutputView="arquivoOutputView"></TabelaArquivo>
+    <TabelaArquivo ArquivoOutputView="arquivoOutputView" />
+
+    <PaginacaoTabela PaginaAtual="ReceberPagina"
+                     TotalDados="arquivoOutputView.TotalDados"
+                     Pagina="arquivoOutputView.Pagina"
+                     TotalPagina="arquivoOutputView.TotalPagina" />
 }
 
 @code {
     private ArquivoOutputView? arquivoOutputView;
+
     protected override async Task OnInitializedAsync()
     {
         arquivoOutputView = await arquivoService.PegarTodos();
         await base.OnInitializedAsync();
+    }
+
+    private async Task ReceberPagina(int paginaAtual)
+    {
+        arquivoOutputView = await arquivoService.PegarTodos(paginaAtual);
     }
 }

@@ -6,14 +6,14 @@
                 <th>Descricao</th>
                 <th>Guardar por</th>
                 <th>Tempo</th>
-                <th>Suporte a Item</th>
-                <th>Suporte a Caixa</th>
-                <th>Ativo</th>
+                <th class="text-center">Suporte a Item</th>
+                <th class="text-center">Suporte a Caixa</th>
+                <th class="text-center">Ativo</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            @if(TipoArquivosView?.Dados is not null)
+            @if (TipoArquivosView?.Dados is not null)
             {
                 @foreach (var tipoArquivo in TipoArquivosView.Dados)
                 {
@@ -22,12 +22,12 @@
                         <td>@tipoArquivo.Descricao</td>
                         <td>@tipoArquivo.Guardar</td>
                         <td>@tipoArquivo.Tempo</td>
-                        <td class="text-center"> 
-                            <InputCheckbox @bind-Value="tipoArquivo.SuporteItem" disabled />
-                        </td>  
-                            
                         <td class="text-center">
-                            <InputCheckbox @bind-Value="tipoArquivo.SuporteControleCaixa" disabled/>
+                            <InputCheckbox @bind-Value="tipoArquivo.SuporteItem" disabled />
+                        </td>
+
+                        <td class="text-center">
+                            <InputCheckbox @bind-Value="tipoArquivo.SuporteControleCaixa" disabled />
                         </td>
                         <td class="text-center">
                             <InputCheckbox @bind-Value="tipoArquivo.Ativo" disabled />

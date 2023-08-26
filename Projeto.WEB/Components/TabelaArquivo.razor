@@ -1,4 +1,4 @@
-<div class="tabela">
+<div class="border">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -27,37 +27,43 @@
         <tbody>
             @if (ArquivoOutputView is not null)
             {
-                @foreach (var arquivoOutputDto in ArquivoOutputView.Dados)
+                var dados = ArquivoOutputView.Dados;
+
+                if (dados is not null)
                 {
-                    <tr>
-                        <td>@arquivoOutputDto.Id</td>
-                        <td>@arquivoOutputDto.Competencia.ToString("MM/yyyy")</td>
-                        <td>@arquivoOutputDto.Descricao</td>
-                        <td>@arquivoOutputDto.DataCadastro.ToShortDateString()</td>
-                        <td>@arquivoOutputDto.DataVencimento.ToShortDateString()</td>
-                        <td>@arquivoOutputDto.Ativo</td>
-                        <td>@arquivoOutputDto.Arquitetura</td>
-                        <td>@arquivoOutputDto.Pratelheira</td>
-                        <td>@arquivoOutputDto.PratelheiraLinha</td>
-                        <td>@arquivoOutputDto.PratelheiraColuna</td>
-                        <td>@arquivoOutputDto.Armario</td>
-                        <td>@arquivoOutputDto.Gaveta</td>
-                        <td>@arquivoOutputDto.DataDescarte.ToShortDateString()</td>
-                        <td>@arquivoOutputDto.NumeroCaixa</td>
-                        <td>@arquivoOutputDto.DataUltimaAtualizacao.ToShortDateString()</td>
-                        <td>@arquivoOutputDto.PrimeiroUsuarioCadastro</td>
-                        <td>@arquivoOutputDto.UltimoUsuarioAtualizar</td>
-                        <td>@arquivoOutputDto.TipoArquivo?.Descricao</td>
-                        <td>@arquivoOutputDto.Usuario?.Login</td>
-                        <td>
-                            <a href="#">Editar</a> |
-                            <a href="#">Excluir</a>
-                        </td>
-                    </tr>
+                    @foreach (var arquivoOutputDto in dados)
+                    {
+                        <tr>
+                            <td>@arquivoOutputDto.Id</td>
+                            <td>@arquivoOutputDto.Competencia.ToString("MM/yyyy")</td>
+                            <td>@arquivoOutputDto.Descricao</td>
+                            <td>@arquivoOutputDto.DataCadastro.ToShortDateString()</td>
+                            <td>@arquivoOutputDto.DataVencimento.ToShortDateString()</td>
+                            <td>@arquivoOutputDto.Ativo</td>
+                            <td>@arquivoOutputDto.Arquitetura</td>
+                            <td>@arquivoOutputDto.Pratelheira</td>
+                            <td>@arquivoOutputDto.PratelheiraLinha</td>
+                            <td>@arquivoOutputDto.PratelheiraColuna</td>
+                            <td>@arquivoOutputDto.Armario</td>
+                            <td>@arquivoOutputDto.Gaveta</td>
+                            <td>@arquivoOutputDto.DataDescarte.ToShortDateString()</td>
+                            <td>@arquivoOutputDto.NumeroCaixa</td>
+                            <td>@arquivoOutputDto.DataUltimaAtualizacao.ToShortDateString()</td>
+                            <td>@arquivoOutputDto.PrimeiroUsuarioCadastro</td>
+                            <td>@arquivoOutputDto.UltimoUsuarioAtualizar</td>
+                            <td>@arquivoOutputDto.TipoArquivo?.Descricao</td>
+                            <td>@arquivoOutputDto.Usuario?.Login</td>
+                            <td>
+                                <a href="#">Editar</a> |
+                                <a href="#">Excluir</a>
+                            </td>
+                        </tr>
+                    }
                 }
             }
         </tbody>
     </table>
+
 </div>
 @code {
     [Parameter]
