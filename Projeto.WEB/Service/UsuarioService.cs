@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace Projeto.WEB.Service;
 
-public class UsuarioServices : IUsuarioServices
+public class UsuarioService : IUsuarioService
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly JsonSerializerOptions _serializerOptions;
@@ -15,7 +15,7 @@ public class UsuarioServices : IUsuarioServices
     private readonly UsuarioOutputDto usuarioOutputDto = new();
     private readonly UsuarioOutputView usuarioOutputView = new();
 
-    public UsuarioServices(IHttpClientFactory httpClientFactory)
+    public UsuarioService(IHttpClientFactory httpClientFactory)
     {
         _httpClientFactory = httpClientFactory;
         _serializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };

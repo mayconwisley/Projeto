@@ -1,28 +1,21 @@
 ﻿@page "/Arquivo"
+@inject IArquivoService arquivoService
 <h3>Arquivo</h3>
 <a href="NovoArquivo" class="btn btn-info">Novo Arquivo</a>
-@if (arquivoOutputDtos is null)
+@if (arquivoOutputView is null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Carregando...</em></p>
 }
 else
 {
-    <TabelaArquivo ArquivoOutputDtos="arquivoOutputDtos"></TabelaArquivo>
+    <TabelaArquivo ArquivoOutputView="arquivoOutputView"></TabelaArquivo>
 }
 
 @code {
-    private List<ArquivoOutputDto> arquivoOutputDtos = new();
-    protected override Task OnInitializedAsync()
+    private ArquivoOutputView? arquivoOutputView;
+    protected override async Task OnInitializedAsync()
     {
-        arquivoOutputDtos = new()
-        {
-            new ArquivoOutputDto{
-                Id = 1
-            },
-            new ArquivoOutputDto{
-                Id = 2
-            }
-        };
-        return base.OnInitializedAsync();
+        arquivoOutputView = await arquivoService.PegarTodos();
+        await base.OnInitializedAsync();
     }
 }

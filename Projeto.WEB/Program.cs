@@ -18,10 +18,12 @@ builder.Services.AddHttpClient("ConexaoApi", con =>
 });
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseUrlApi) });
-builder.Services.AddScoped<ITipoArquivoServices, TipoArquivoServices>();
-builder.Services.AddScoped<IUsuarioServices, UsuarioServices>();
+builder.Services.AddScoped<ITipoArquivoService, TipoArquivoService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IControleCaixaService, ControleCaixaService>();
+builder.Services.AddScoped<IArquivoService, ArquivoService>();
 
 builder.Services.AddBlazoredLocalStorage();
-builder.Services.AddScoped<ITIpoAquivoLocalStorageServices, TIpoAquivoLocalStorageService>();
+builder.Services.AddScoped<ITipoAquivoLocalStorageService, TipoAquivoLocalStorageService>();
 
 await builder.Build().RunAsync();

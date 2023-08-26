@@ -2,7 +2,7 @@
 
 namespace Projeto.WEB.Service.Interface;
 
-public interface ITipoArquivoServices
+public interface ITipoArquivoService
 {
     Task<TipoArquivoView> PegarTodos(int pagina = 1, int tamanho = 25, string pesquisa = "");
     Task<TipoArquivoView> PegarTodosAtivos(int pagina = 1, int tamanho = 25, string pesquisa = "");

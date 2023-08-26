@@ -1,32 +1,31 @@
 @page "/ControleCaixa"
+@inject IControleCaixaService controleCaixaService
 <h3>Controle de Caixa</h3>
 <a href="NovoControleCaixa" class="btn btn-info">Novo Controle</a>
 
-@if (controleCaixaOutputDtos is null)
+@if (controleCaixaOutputView is null)
 {
     <p><em>Carregando</em></p>
 }
 else
 {
-    <TabelaControleCaixa ControleCaixaOutputDtos="controleCaixaOutputDtos"></TabelaControleCaixa>
+    <TabelaControleCaixa ControleCaixaOutputView="controleCaixaOutputView"></TabelaControleCaixa>
 }
 
 @code {
-    private List<ControleCaixaOutputDto> controleCaixaOutputDtos = new();
-    protected override Task OnInitializedAsync()
+    private ControleCaixaOutputView? controleCaixaOutputView;
+
+    protected override async Task OnInitializedAsync()
     {
-       controleCaixaOutputDtos = new()
+        try
         {
-            new ControleCaixaOutputDto()
-            {
-                Id = 1,
-                NumeroAtual = 1,
-                TipoArquivo = new TipoArquivoDto(){
-                    Descricao = "Teste"
-                }
-            }
-        };
-        
-        return base.OnInitializedAsync();
+            controleCaixaOutputView = await controleCaixaService.PegarTodos();
+
+            await base.OnInitializedAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 }

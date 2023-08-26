@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace Projeto.WEB.Service;
 
-public class TipoArquivoServices : ITipoArquivoServices
+public class TipoArquivoService : ITipoArquivoService
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly JsonSerializerOptions _serializerOptions;
@@ -14,7 +14,7 @@ public class TipoArquivoServices : ITipoArquivoServices
     private readonly TipoArquivoDto tipoArquivoDto = new();
     private readonly TipoArquivoView tipoArquivoView = new();
 
-    public TipoArquivoServices(IHttpClientFactory httpClientFactory)
+    public TipoArquivoService(IHttpClientFactory httpClientFactory)
     {
         _httpClientFactory = httpClientFactory;
         _serializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };

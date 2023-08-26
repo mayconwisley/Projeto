@@ -9,14 +9,14 @@
             </tr>
         </thead>
         <tbody>
-            @if (ControleCaixaOutputDtos is not null)
+            @if (ControleCaixaOutputView is not null)
             {
-                @foreach (var controleCaixaOutputDto in ControleCaixaOutputDtos)
+                @foreach (var controleCaixaOutputItem in ControleCaixaOutputView.Dados)
                 {
                     <tr>
-                        <td>@controleCaixaOutputDto.Id</td>
-                        <td>@controleCaixaOutputDto.NumeroAtual</td>
-                        <td>@controleCaixaOutputDto.TipoArquivo?.Descricao</td>
+                        <td>@controleCaixaOutputItem.Id</td>
+                        <td>@controleCaixaOutputItem.NumeroAtual</td>
+                        <td>@controleCaixaOutputItem.TipoArquivo?.Descricao</td>
                         <td>
                             <a href="#">Editar</a> |
                             <a href="#">Excluir</a>
@@ -30,5 +30,5 @@
 
 @code {
     [Parameter]
-    public List<ControleCaixaOutputDto>? ControleCaixaOutputDtos { get; set; }
+    public ControleCaixaOutputView? ControleCaixaOutputView { get; set; }
 }

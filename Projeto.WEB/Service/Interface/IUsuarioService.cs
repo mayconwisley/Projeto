@@ -2,7 +2,7 @@ using Projeto.WEB.Model;
 
 namespace Projeto.WEB.Service.Interface;
 
-public interface IUsuarioServices
+public interface IUsuarioService
 {
     Task<UsuarioOutputView> PegarTodos(int pagina = 1, int tamanho = 25, string pesquisa = "");
     Task<UsuarioOutputView> PegarTodosAtivos(int pagina = 1, int tamanho = 25, string pesquisa = "");

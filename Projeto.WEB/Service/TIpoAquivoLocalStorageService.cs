@@ -4,17 +4,17 @@ using Projeto.WEB.Service.Interface;
 
 namespace Projeto.WEB.Service
 {
-    public class TIpoAquivoLocalStorageService : ITIpoAquivoLocalStorageServices
+    public class TipoAquivoLocalStorageService : ITipoAquivoLocalStorageService
     {
         private const string key = "TipoArquivoColecao";
 
         private readonly ILocalStorageService _localStorageService;
-        private readonly ITipoArquivoServices _tipoArquivoServices;
+        private readonly ITipoArquivoService _tipoArquivoService;
 
-        public TIpoAquivoLocalStorageService(ILocalStorageService localStorageService, ITipoArquivoServices tipoArquivoServices)
+        public TipoAquivoLocalStorageService(ILocalStorageService localStorageService, ITipoArquivoService tipoArquivoService)
         {
             _localStorageService = localStorageService;
-            _tipoArquivoServices = tipoArquivoServices;
+            _tipoArquivoService = tipoArquivoService;
         }
 
         public async Task<TipoArquivoView> PegarTiposArquivosStorage()
@@ -29,7 +29,8 @@ namespace Projeto.WEB.Service
 
         private async Task<TipoArquivoView> AdicionarColecao()
         {
-            var tipoArquivoColecao = await _tipoArquivoServices.PegarTodos();
+            var tipoArquivoColecao = await _tipoArquivoService.PegarTodos();
+           
 
             if (tipoArquivoColecao is not null)
             {

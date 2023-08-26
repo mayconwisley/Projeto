@@ -25,9 +25,9 @@
             </tr>
         </thead>
         <tbody>
-            @if (ArquivoOutputDtos is not null)
+            @if (ArquivoOutputView is not null)
             {
-                @foreach (var arquivoOutputDto in ArquivoOutputDtos)
+                @foreach (var arquivoOutputDto in ArquivoOutputView.Dados)
                 {
                     <tr>
                         <td>@arquivoOutputDto.Id</td>
@@ -61,5 +61,5 @@
 </div>
 @code {
     [Parameter]
-    public List<ArquivoOutputDto>? ArquivoOutputDtos { get; set; }
+    public ArquivoOutputView? ArquivoOutputView { get; set; }
 }

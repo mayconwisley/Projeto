@@ -1,6 +1,5 @@
 ﻿@page "/TipoArquivo"
-@inject ITipoArquivoServices tipoArquivoServices;
-@inject ITIpoAquivoLocalStorageServices tipoArquivoLocalStorageService;
+@inject ITipoAquivoLocalStorageService tipoArquivoLocalStorageService;
 
 <PageTitle>Tipos de Arquivos</PageTitle>
 <h3>Lista Tipo Arquivo</h3>
@@ -8,7 +7,7 @@
 
 @if (tipoArquivoView is null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Carregando...</em></p>
 }
 else
 {
@@ -17,7 +16,8 @@ else
 
 @code {
 
-    public TipoArquivoView? tipoArquivoView = new();
+    public TipoArquivoView? tipoArquivoView;
+
     protected override async Task OnInitializedAsync()
     {
         try
@@ -28,6 +28,10 @@ else
         {
             throw;
         }
+    }
+    private async Task LimparLocalStorege()
+    {
+        await tipoArquivoLocalStorageService.RemoverColecao();
     }
 
 }
