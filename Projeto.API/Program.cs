@@ -78,8 +78,11 @@ builder.Services.AddAuthentication(x =>
         };
     });
 
+var passWord = Environment.GetEnvironmentVariable("SQLSenha", EnvironmentVariableTarget.Machine);
 
-var strDataBase = builder.Configuration.GetConnectionString("DataBase");
+var strDataBase = builder.Configuration.GetConnectionString("DataBase")!.Replace("{{pass}}", passWord);
+builder.Services.AddDbContext<AppDbContext>(cd => cd.UseSqlServer(strDataBase));
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ITipoArquivoRepositorio, TipoArquivoRepositorio>();
 builder.Services.AddScoped<ITipoArquivoServico, TipoArquivoServico>();
@@ -95,7 +98,7 @@ builder.Services.AddScoped<IProcessoServico, ProcessoServico>();
 builder.Services.AddScoped<IArquivoRepositorio, ArquivoRepositorio>();
 builder.Services.AddScoped<IArquivoServico, ArquivoServico>();
 
-builder.Services.AddDbContext<AppDbContext>(cd => cd.UseSqlServer(strDataBase));
+
 
 var app = builder.Build();
 
@@ -106,7 +109,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(politica => politica.WithOrigins("http://localhost:7093", "https://localhost:7093","http://localhost:5013")
+app.UseCors(politica => politica.WithOrigins("http://localhost:7093", "https://localhost:7093", "http://localhost:5013")
     .AllowAnyMethod()
     .AllowAnyHeader()
     .WithHeaders(HeaderNames.ContentType)
